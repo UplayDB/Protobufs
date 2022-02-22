@@ -667,16 +667,22 @@ message SharePlayHostSettingsData {
     optional string sourceTrackingData = 4;
 }
 
-message SharePlayPostSessionFeedbackData {
-    optional string inputSource = 1;
-    optional uint32 brand = 2;
-    optional string invitationId = 3;
-    optional uint32 rating = 4;
-    optional bool poorConnection = 5;
-    optional bool inputLag = 6;
-    optional bool audioIssue = 7;
-    optional bool invitationFailed = 8;
-    optional bool other = 9;
+message StreamingFeedBackData {
+    optional bool audioIssue = 1 [default = false];
+    optional bool inputLag = 2 [default = false];
+    optional bool invitationFailed = 3 [default = false];
+    optional bool other = 4 [default = false];
+    optional bool poorConnection = 5 [default = false];
+    optional uint32 rating = 6;
+    optional string inputSource = 7;
+    optional uint32 brand = 8;
+    optional string invitationId = 9;
+    optional bool hostPerformanceIssue = 10 [default = false];
+    optional bool guestPerformanceIssue = 11 [default = false];
+    optional bool poorGuestBehavior = 12 [default = false];
+    optional bool videoIssue = 13 [default = false];
+    optional string side = 14;
+    optional string userType = 15;
 }
 
 message EventTypeData {
@@ -741,7 +747,7 @@ message EventObjectData {
     optional SharePlayOnboardingData sharePlayOnboarding = 52;
     optional SharePlayHostOutOfFocusStartData sharePlayHostOutOfFocusStart = 53;
     optional SharePlayHostOutOfFocusStopData sharePlayHostOutOfFocusStop = 54;
-    optional SharePlayPostSessionFeedbackData sharePlayPostSessionFeedback = 55;
+    optional StreamingFeedBackData streamingFeedBack = 55;
 }
 
 message Event {
