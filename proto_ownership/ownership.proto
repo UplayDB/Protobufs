@@ -203,6 +203,7 @@ message RegisterOwnershipFromOculusReq {
     optional string access_token = 1;
     optional string oculus_app_id = 2;
     optional string oculus_user_id = 3;
+    optional string user_id = 4;
 }
 
 message RegisterOwnershipFromOculusRsp {
@@ -634,9 +635,9 @@ message Req {
     optional DeprecatedGetProductFromCdKeyReq deprecated_get_product_from_cd_key_req = 6;
     optional GetProductConfigReq get_product_config_req = 9;
     optional DeprecatedGetLatestManifestsReq deprecated_get_latest_manifests_req = 10;
-    optional CloudsaveReq cloudsave_req = 11;
+    optional CloudsaveReq cloudsave_req = 11 [deprecated = true];
     optional GetBatchDownloadUrlsReq get_batch_download_urls_req = 12;
-    optional CloudsaveReqV2 cloudsave_req_v2 = 13;
+    optional CloudsaveReqV2 cloudsave_req_v2 = 13 [deprecated = true];
     optional GetUplayPCTicketReq get_uplay_pc_ticket_req = 14;
     optional RetryUplayCoreInitializeReq retry_uplay_core_initialize_req = 15;
     optional ConsumeOwnershipReq consume_ownership_req = 16;
@@ -662,10 +663,10 @@ message Rsp {
     optional DeprecatedGetProductFromCdKeyRsp deprecated_get_product_from_cd_key_rsp = 5;
     optional GetProductConfigRsp get_product_config_rsp = 9;
     optional DeprecatedGetLatestManifestsRsp deprecated_get_latest_manifests_rsp = 10;
-    optional CloudsaveRsp cloudsave_rsp = 11;
+    optional CloudsaveRsp cloudsave_rsp = 11 [deprecated = true];
     optional GetBatchDownloadUrlsRsp get_batch_download_urls_rsp = 12;
     optional GetUplayPCTicketRsp get_uplay_pc_ticket_rsp = 13;
-    optional CloudsaveRspV2 cloudsave_rsp_v2 = 14;
+    optional CloudsaveRspV2 cloudsave_rsp_v2 = 14 [deprecated = true];
     optional ConsumeOwnershipRsp consume_ownership_rsp = 15;
     optional SwitchProductBranchRsp switch_product_branch_rsp = 16;
     optional UnlockProductBranchRsp unlock_product_branch_rsp = 17;
