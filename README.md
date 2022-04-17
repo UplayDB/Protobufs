@@ -7,5 +7,5 @@ How to get?
 3. Start Scylla and hook upc.exe (I think it was x86)
 4. Dump the exe with the "Dump" button anywhere your disk
 5. Download and unzip [pbtk](https://github.com/marin-m/pbtk)
-6. Start pbtk (with or without the gui) and select the dumped exe
-.
+6. Start pbtk (with or without the gui) and select the dumped exe.
+7. It will dump 50 protobufs, open where is dumped and there you go!
