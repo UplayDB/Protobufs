@@ -138,18 +138,6 @@ message CreateProcessRsp {
     required uint32 pid = 1;
 }
 
-message StartStreamPush {
-    required uint32 frame_width = 1;
-    required uint32 frame_height = 2;
-    required uint32 buffer_size = 3;
-    required uint32 frames_per_second = 4;
-    required string buffer_name = 5;
-}
-
-message EndStreamPush {
-    
-}
-
 message VideoFrameReadyReq {
     required uint32 buffer_index = 1;
 }
@@ -185,17 +173,6 @@ message CursorChangePush {
     required uint32 cursor_id = 1;
 }
 
-message StreamingStartPush {
-    required string session_id = 1;
-    required string token = 2;
-    required string app_id = 3;
-    required bool is_uat = 4;
-    required uint32 bitrate = 5;
-    required string guest_id = 6;
-    required bool mouse_keyboard_allowed = 7;
-    required bool gamepad_allowed = 8;
-}
-
 message StreamingHostStartPush {
     required string session_id = 1;
     required string token = 2;
@@ -204,12 +181,15 @@ message StreamingHostStartPush {
     required uint32 bitrate = 5;
     required bool mouse_keyboard_allowed = 6;
     required bool gamepad_allowed = 7;
+    required string host_profile_id = 8;
 }
 
 message StreamingHostStartResponse {
     required bool result = 1;
     optional string invite_token = 2;
     optional StreamingStartConfig start_config = 3;
+    optional string error_msg = 4;
+    optional int32 error_code = 5;
 }
 
 message StreamingHostGuestPermissions {
@@ -235,10 +215,7 @@ message StreamingHostGuestConnectedReq {
 
 message StreamingHostGuestDisconnectedReq {
     required uint32 guest_id = 1;
-}
-
-message StreamingStopPush {
-    
+    required string profile_id = 2;
 }
 
 message StreamingHostStopPush {
@@ -255,22 +232,22 @@ message StreamingSettingsPush {
     required bool gamepad_allowed = 3;
 }
 
+message StreamingHostPermissionsPush {
+    required uint32 client_id = 1;
+    required bool mouse_keyboard_allowed = 2;
+    required bool gamepad_allowed = 3;
+}
+
+message StreamingHostAddAllowedProfileIdsPush {
+    repeated string allowed_profile_ids = 1;
+}
+
 message StreamingStartConfig {
     optional uint32 width = 1;
     optional uint32 height = 2;
     optional uint32 bitrate = 3;
     optional bool is_audio_enabled = 4;
     optional bool is_focused = 5;
-}
-
-message StreamingStartReq {
-    required bool result = 1;
-    optional string invite_token = 2;
-    optional StreamingStartConfig start_config = 3;
-}
-
-message StreamingStopReq {
-    required bool result = 1;
 }
 
 message StreamingHostStopReq {
@@ -281,16 +258,15 @@ message StreamingSettingsReq {
     required uint32 result = 1;
 }
 
-message StreamingGuestConnectedReq {
-    required string guest_id = 1;
-}
-
-message StreamingGuestDisconnectedReq {
-    required string guest_id = 1;
-}
-
 message StreamingLatencyReq {
     required uint32 latency = 1;
+    required string profile_id = 2;
+}
+
+message StreamingHostMetricsReq {
+    required uint32 latency = 1;
+    required float bitrate = 2;
+    required uint32 client_id = 3;
 }
 
 message ScreenshotReadyReq {
@@ -357,16 +333,12 @@ message Req {
     optional IMESetCompositionReq ime_set_composition_req = 24;
     optional IMECancelCompositionReq ime_cancel_composition_req = 25;
     optional IMEUpdateCandidatesReq ime_update_candidates_req = 26;
-    optional StreamingStartReq streaming_start_req = 27;
-    optional StreamingStopReq streaming_stop_req = 28;
-    optional StreamingSettingsReq streaming_settings_req = 29;
-    optional StreamingGuestConnectedReq streaming_guest_connected_req = 30;
-    optional StreamingGuestDisconnectedReq streaming_guest_disconnected_req = 31;
-    optional StreamingLatencyReq streaming_latency_req = 32;
-    optional StreamingHostStartResponse streaming_host_start_response = 33;
-    optional StreamingHostGuestConnectedReq streaming_host_guest_connected_req = 34;
-    optional StreamingHostGuestDisconnectedReq streaming_host_guest_disconnected_req = 35;
-    optional StreamingHostStopReq streaming_host_stop_req = 36;
+    optional StreamingSettingsReq streaming_settings_req = 27;
+    optional StreamingHostStartResponse streaming_host_start_response = 29;
+    optional StreamingHostGuestConnectedReq streaming_host_guest_connected_req = 30;
+    optional StreamingHostGuestDisconnectedReq streaming_host_guest_disconnected_req = 31;
+    optional StreamingHostStopReq streaming_host_stop_req = 32;
+    repeated StreamingHostMetricsReq streaming_host_metrics_req = 33;
 }
 
 message Rsp {
@@ -387,21 +359,19 @@ message UserBannedPush {
 
 message Push {
     optional MultipleLogin multiple_login = 1;
-    optional StartStreamPush start_stream = 2;
-    optional EndStreamPush end_stream = 3;
-    optional CaptureScreenshotPush capture_screenshot = 4;
-    optional CursorChangePush cursor_change = 5;
-    optional UserBannedPush user_banned = 6;
-    optional UiOpenedPush ui_opened = 7;
-    optional UiClosedPush ui_closed = 8;
-    optional IMEClearCompositionPush ime_clear_composition = 9;
-    optional IMESelectCandidatePush ime_select_candidate = 10;
-    optional StreamingStartPush streaming_start = 11;
-    optional StreamingStopPush streaming_stop = 12;
-    optional StreamingSettingsPush streaming_settings = 13;
-    optional StreamingHostStartPush streaming_host_start = 14;
-    optional StreamingHostStopPush streaming_host_stop = 15;
-    optional StreamingHostKickPush streaming_host_kick = 16;
+    optional CaptureScreenshotPush capture_screenshot = 2;
+    optional CursorChangePush cursor_change = 3;
+    optional UserBannedPush user_banned = 4;
+    optional UiOpenedPush ui_opened = 5;
+    optional UiClosedPush ui_closed = 6;
+    optional IMEClearCompositionPush ime_clear_composition = 7;
+    optional IMESelectCandidatePush ime_select_candidate = 8;
+    optional StreamingSettingsPush streaming_settings = 9;
+    optional StreamingHostStartPush streaming_host_start = 10;
+    optional StreamingHostStopPush streaming_host_stop = 11;
+    optional StreamingHostKickPush streaming_host_kick = 12;
+    optional StreamingHostAddAllowedProfileIdsPush streaming_host_add_allowed_profileIds = 13;
+    optional StreamingHostPermissionsPush streaming_host_permissions = 14;
 }
 
 message Upstream {

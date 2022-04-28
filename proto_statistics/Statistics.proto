@@ -617,36 +617,8 @@ message SharePlayHostSessionStreamingStartData {
     optional bool is_audio_enabled = 4;
 }
 
-message StreamingHostStartSessionData {
-    optional string invitationId = 1;
-    optional string side = 2;
-    optional string spaceIdGame = 3;
-}
-
-message StreamingHostStopSessionData {
-    optional string invitationId = 1;
-    optional string side = 2;
-    optional string spaceIdGame = 3;
-    optional string reason = 4;
-}
-
-message StreamingErrorData {
-    optional string errorName = 1;
-    optional string errorType = 2;
-    optional string invitationId = 3;
-    optional string side = 4;
-}
-
 message SharePlayHostSessionStreamingStopData {
     optional string reason = 1;
-}
-
-message SharePlayHostOutOfFocusStartData {
-    optional string invitationId = 1;
-}
-
-message SharePlayHostOutOfFocusStopData {
-    optional string invitationId = 1;
 }
 
 message SharePlayOnboardingData {
@@ -687,6 +659,35 @@ message SharePlayHostSettingsData {
     optional string sourceTrackingData = 4;
 }
 
+message StreamingHostStartSessionData {
+    optional string hostPeerId = 1;
+    optional string side = 2;
+    optional string spaceIdGame = 3;
+    optional uint32 bitrateMbps = 4;
+}
+
+message StreamingHostStopSessionData {
+    optional string hostPeerId = 1;
+    optional string side = 2;
+    optional string spaceIdGame = 3;
+    optional string reason = 4;
+    optional uint32 bitrateMbps = 5;
+}
+
+message StreamingHostSessionSettingsChanged {
+    optional string sender = 1;
+    optional string settingName = 2;
+    optional string newValue = 3;
+    optional string oldValue = 4;
+}
+
+message StreamingErrorData {
+    optional string errorName = 1;
+    optional string errorType = 2;
+    optional string hostPeerId = 3;
+    optional string side = 4;
+}
+
 message StreamingFeedBackData {
     optional bool audioIssue = 1 [default = false];
     optional bool inputLag = 2 [default = false];
@@ -703,6 +704,18 @@ message StreamingFeedBackData {
     optional bool videoIssue = 13 [default = false];
     optional string side = 14;
     optional string userType = 15;
+}
+
+message StreamingHostOutOfFocusStartData {
+    optional string hostPeerId = 1;
+    optional string side = 2;
+    optional string spaceIdGame = 3;
+}
+
+message StreamingHostOutOfFocusStopData {
+    optional string hostPeerId = 1;
+    optional string side = 2;
+    optional string spaceIdGame = 3;
 }
 
 message EventTypeData {
@@ -765,12 +778,13 @@ message EventObjectData {
     optional SharePlayHostErrorData sharePlayHostError = 50;
     optional SharePlayHostSettingsData sharePlayHostSettings = 51;
     optional SharePlayOnboardingData sharePlayOnboarding = 52;
-    optional SharePlayHostOutOfFocusStartData sharePlayHostOutOfFocusStart = 53;
-    optional SharePlayHostOutOfFocusStopData sharePlayHostOutOfFocusStop = 54;
+    optional StreamingHostOutOfFocusStartData streamingHostOutOfFocusStart = 53;
+    optional StreamingHostOutOfFocusStopData streamingHostOutOfFocusStop = 54;
     optional StreamingFeedBackData streamingFeedBack = 55;
     optional StreamingHostStartSessionData streamingHostStartSession = 56;
     optional StreamingHostStopSessionData streamingHostStopSession = 57;
     optional StreamingErrorData streamingError = 58;
+    optional StreamingHostSessionSettingsChanged streamingHostSessionSettings = 59;
 }
 
 message Event {
