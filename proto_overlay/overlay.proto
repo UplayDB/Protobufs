@@ -269,6 +269,12 @@ message StreamingHostMetricsReq {
     required uint32 client_id = 3;
 }
 
+message StreamingVGPEvent {
+    required uint32 source = 1;
+    required string profile_id = 2;
+    required uint32 streaming_gamepad_id = 3;
+}
+
 message ScreenshotReadyReq {
     required bool isVulkanHDR = 1;
 }
@@ -339,6 +345,7 @@ message Req {
     optional StreamingHostGuestDisconnectedReq streaming_host_guest_disconnected_req = 31;
     optional StreamingHostStopReq streaming_host_stop_req = 32;
     repeated StreamingHostMetricsReq streaming_host_metrics_req = 33;
+    optional StreamingVGPEvent streaming_vgp_event_req = 34;
 }
 
 message Rsp {
