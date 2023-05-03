@@ -109,7 +109,13 @@ message GameLaunchObjectData {
 }
 
 message AppQuitObjectData {
-    optional QuitReason quitReason = 1;
+    optional uint32 secondsSinceStart = 2;
+    optional uint32 demuxConnectionFailureCount = 3;
+    optional uint32 discardedEventsCount = 5;
+    optional bool generatedFromCache = 6 [default = false];
+    optional bool shopVisible = 7 [default = false];
+    optional string quitReason = 8;
+    
     enum QuitReason {
         USER = 1;
         LOGOUT = 2;
@@ -123,12 +129,6 @@ message AppQuitObjectData {
         CLIENTOUTDATED = 10;
         UNKNOWN = 11;
     }
-    
-    optional uint32 secondsSinceStart = 2;
-    optional uint32 demuxConnectionFailureCount = 3;
-    optional uint32 discardedEventsCount = 5;
-    optional bool generatedFromCache = 6 [default = false];
-    optional bool shopVisible = 7 [default = false];
 }
 
 message GameCloudSaveSyncObjectData {
@@ -750,6 +750,8 @@ message StreamingVGPEvent {
     optional string side = 6;
     optional string spaceIdGame = 7;
     optional string state = 8;
+    optional string vid = 9;
+    optional string pid = 10;
 }
 
 message StreamingHostLinkCreatedEvent {
