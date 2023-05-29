@@ -324,7 +324,7 @@ message StreamingHostReadyReq {
 }
 
 message StreamingHostSignalErrorReq {
-    required uint32 error_code = 1;
+    required int32 error_code = 1;
 }
 
 message StreamingHostSDKEventReq {
