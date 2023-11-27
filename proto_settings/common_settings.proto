@@ -91,6 +91,7 @@ message BrandedInstaller {
 
 message ConnectView {
     optional bool enabled = 1 [default = false];
+    optional bool default_opt_out = 2 [default = false];
 }
 
 message SharePlay {

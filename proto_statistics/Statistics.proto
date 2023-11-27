@@ -784,6 +784,14 @@ message RemotePlayHostSessionStreamingStopData {
     optional string streamingService = 4;
 }
 
+message AuthenticationData {
+    optional int32 success = 1;
+    optional string failReason = 2;
+    optional string clientVersion = 3;
+    optional string shellVersion = 4;
+    optional string customData = 5;
+}
+
 message EventObjectData {
     optional GameLaunchObjectData gameLaunch = 1;
     optional UINavObjectData uiNav = 2;
@@ -849,6 +857,7 @@ message EventObjectData {
     optional RemotePlayHostSessionStreamingStartData remotePlaySessionStart = 62;
     optional RemotePlayHostSessionStreamingStopData remotePlaySessionStop = 63;
     optional StreamingStatusData streamingStatus = 64;
+    optional AuthenticationData authentication = 68;
     
     reserved 65, 66, 67;
 }
@@ -883,8 +892,15 @@ message StatisticsSession {
     optional uint32 secondsSinceStart = 7;
 }
 
+message FreeFloatingMixin {
+    repeated Event events = 1;
+    optional uint32 buildNumber = 2;
+    optional uint32 secondsSinceStart = 3;
+}
+
 message StatisticsCache {
     required uint32 version = 1;
     repeated StatisticsSession sessions = 2;
     optional string date = 3;
+    optional FreeFloatingMixin freeFloating = 4;
 }
