@@ -181,6 +181,18 @@ message RegisterOwnershipReq {
     required uint32 product_id = 1;
     optional string cd_key = 2;
     optional bool deprecated_test_config = 3;
+    
+    optional ActivationMode activation_mode = 4 [default = ActivationMode_None];
+    enum ActivationMode {
+        ActivationMode_None = 0;
+        ActivationMode_Uplay = 1;
+        ActivationMode_Epic = 2;
+        ActivationMode_Steam = 3;
+        ActivationMode_BrandedInstaller = 4;
+        ActivationMode_SwitchStreaming = 5;
+        ActivationMode_EquinoxStreaming = 6;
+        ActivationMode_GFNStreaming = 7;
+    }
 }
 
 message RegisterOwnershipByCdKeyReq {

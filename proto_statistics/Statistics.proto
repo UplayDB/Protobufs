@@ -792,6 +792,14 @@ message AuthenticationData {
     optional string customData = 5;
 }
 
+message UIErrorData {
+    optional string failReason = 1;
+    optional string source = 2;
+    optional string customData = 3;
+    optional bool generatedFromCache = 4;
+    optional string shellVersion = 5;
+}
+
 message EventObjectData {
     optional GameLaunchObjectData gameLaunch = 1;
     optional UINavObjectData uiNav = 2;
@@ -858,6 +866,7 @@ message EventObjectData {
     optional RemotePlayHostSessionStreamingStopData remotePlaySessionStop = 63;
     optional StreamingStatusData streamingStatus = 64;
     optional AuthenticationData authentication = 68;
+    optional UIErrorData uiError = 69;
     
     reserved 65, 66, 67;
 }
