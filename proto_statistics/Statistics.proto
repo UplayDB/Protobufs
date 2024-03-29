@@ -223,6 +223,7 @@ message AppStartObjectData {
     optional bool trustedDevice = 14;
     optional bool verifiedPhone = 15;
     optional string clientLanguage = 16;
+    optional bool betaPopulation = 17;
     
     enum AuthType {
         NORMAL = 0;
@@ -618,21 +619,6 @@ message TrustedDeviceActionData {
     optional bool defaultFriendlyName = 3;
 }
 
-message GameStarterStartRequestObjectData {
-    optional string steamId = 1;
-    optional string steamTicket = 2;
-}
-
-message MercuryCheckoutRequestObjectData {
-    optional string steamId = 1;
-    optional string partnerPlatformType = 2;
-}
-
-message MercuryWebshopGetObjectData {
-    optional string partnerPlatformType = 1;
-    optional string misconfiguredProductSteamIds = 2;
-}
-
 message SharePlayHostSessionStreamingStartData {
     optional string hostPeerId = 1;
     optional string side = 2;
@@ -798,6 +784,22 @@ message RemotePlayHostSessionStreamingStopData {
     optional string streamingService = 4;
 }
 
+message AuthenticationData {
+    optional int32 success = 1;
+    optional string failReason = 2;
+    optional string clientVersion = 3;
+    optional string shellVersion = 4;
+    optional string customData = 5;
+}
+
+message UIErrorData {
+    optional string failReason = 1;
+    optional string source = 2;
+    optional string customData = 3;
+    optional bool generatedFromCache = 4;
+    optional string shellVersion = 5;
+}
+
 message EventObjectData {
     optional GameLaunchObjectData gameLaunch = 1;
     optional UINavObjectData uiNav = 2;
@@ -863,9 +865,10 @@ message EventObjectData {
     optional RemotePlayHostSessionStreamingStartData remotePlaySessionStart = 62;
     optional RemotePlayHostSessionStreamingStopData remotePlaySessionStop = 63;
     optional StreamingStatusData streamingStatus = 64;
-    optional GameStarterStartRequestObjectData gameStarterStartRequest = 65;
-    optional MercuryCheckoutRequestObjectData mercuryCheckoutRequest = 66;
-    optional MercuryWebshopGetObjectData mercuryWebshopGet = 67;
+    optional AuthenticationData authentication = 68;
+    optional UIErrorData uiError = 69;
+    
+    reserved 65, 66, 67;
 }
 
 message Event {
@@ -898,8 +901,15 @@ message StatisticsSession {
     optional uint32 secondsSinceStart = 7;
 }
 
+message FreeFloatingMixin {
+    repeated Event events = 1;
+    optional uint32 buildNumber = 2;
+    optional uint32 secondsSinceStart = 3;
+}
+
 message StatisticsCache {
     required uint32 version = 1;
     repeated StatisticsSession sessions = 2;
     optional string date = 3;
+    optional FreeFloatingMixin freeFloating = 4;
 }

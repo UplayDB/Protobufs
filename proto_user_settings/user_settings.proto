@@ -34,6 +34,8 @@ message ProductBranch {
     optional uint32 branchId = 2;
     optional bool useDefault = 3;
     optional string password = 4;
+    optional string branchIdStr = 5;
+    optional string branchUuid = 6;
 }
 
 message ProductBranches {
@@ -45,6 +47,8 @@ message KnownBranch {
     optional uint32 branchId = 2;
     optional string branchName = 3;
     optional string password = 4;
+    optional string branchIdStr = 5;
+    optional string branchUuid = 6;
 }
 
 message KnownBranches {
