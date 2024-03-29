@@ -331,6 +331,7 @@ message StreamingHostSDKEventReq {
     required uint32 severity = 1;
     required string message = 2;
     required string host_peer_id = 3;
+    required uint32 err_code = 4;
 }
 
 message ScreenshotReadyReq {

@@ -64,6 +64,7 @@ message StartReq {
     optional string steamOwnerId = 18;
     optional NvidiaInfo nvidiaInfo = 19;
     optional WeGameInfo weGameInfo = 20;
+    optional uint32 steamGameId = 21;
 }
 
 message HotkeyStateChangedReq {

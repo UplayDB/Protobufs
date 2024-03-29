@@ -38,6 +38,10 @@ message UserInfo {
     oneof _hash_iterations_offset {
         uint32 hash_iterations_offset = 11;
     }
+    
+    oneof _ubi_profile_id {
+        string ubi_profile_id = 12;
+    }
 }
 
 message LegacyVulnerableUnversionedCache {
