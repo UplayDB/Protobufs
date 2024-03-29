@@ -14,11 +14,18 @@ message Achievements {
 message Product {
     required string product_id = 1;
     required string platform_id = 2;
+    optional string space_id = 3;
+}
+
+message SteamContext {
+    optional uint32 application_id = 1;
+    optional string account_id = 2;
 }
 
 message ProductAchievements {
     required Product product = 1;
     required Achievements achievements = 2;
+    optional SteamContext steam_context = 3;
 }
 
 message AchievementBlob {
