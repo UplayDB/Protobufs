@@ -34,21 +34,25 @@ message WeGameInfo {
     optional uint64 rail_game_id = 1;
 }
 
+message SteamInfo {
+    optional string steamProfileId = 1;
+    optional string steamTicket = 2;
+    optional string steamGameOwnerProfileId = 3;
+    optional uint32 steamGameId = 4;
+    optional uint32 steamFreePackageId = 5;
+    optional uint32 steamRequiredProductId = 6;
+    repeated SteamProofOfPurchase steamProofOfPurchase = 7;
+}
+
 message StartReq {
     required uint32 launcherVersion = 1;
     required uint32 uplayId = 2;
-    required bool steamGame = 3;
     required uint32 gameVersion = 4;
     optional uint32 productId = 5;
     optional string simulationConfig = 7;
-    optional string steamTicket = 8;
-    optional string steamId = 9;
     optional string executablePath = 10;
     optional string executableArguments = 11;
     optional uint64 timeStart = 12;
-    optional uint32 steamFreePackageId = 13;
-    optional uint32 steamRequiredProductId = 14;
-    repeated SteamProofOfPurchase steamProofOfPurchase = 15;
     optional OculusInfo oculusInfo = 16;
     
     optional Platform platform = 17;
@@ -61,10 +65,11 @@ message StartReq {
         Platform_WeGame = 6;
     }
     
-    optional string steamOwnerId = 18;
     optional NvidiaInfo nvidiaInfo = 19;
     optional WeGameInfo weGameInfo = 20;
-    optional uint32 steamGameId = 21;
+    optional SteamInfo steamInfo = 22;
+    
+    reserved 3, 6, 8, 9, 13, 14, 15, 18, 21;
 }
 
 message HotkeyStateChangedReq {

@@ -42,6 +42,10 @@ message UserInfo {
     oneof _ubi_profile_id {
         string ubi_profile_id = 12;
     }
+    
+    oneof _steam_session_profile_id {
+        string steam_session_profile_id = 13;
+    }
 }
 
 message LegacyVulnerableUnversionedCache {
