@@ -109,9 +109,9 @@ message OwnedGame {
     
     enum State {
         State_Unavailable = 0;
-        State_PreReleased = 1;
+        State_Visible = 1;
         State_Downloadable = 2;
-        State_Released = 3;
+        State_Playable = 3;
         State_Expired = 4;
     }
 }
