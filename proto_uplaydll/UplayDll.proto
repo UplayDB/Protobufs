@@ -1540,7 +1540,7 @@ enum ProductType {
 
 enum ProductState {
     ProductState_Visible = 1;
-    ProductState_Installable = 2;
+    ProductState_Downloadable = 2;
     ProductState_Playable = 3;
     ProductState_Expired = 4;
 }
