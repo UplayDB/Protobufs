@@ -106,6 +106,7 @@ message GameLaunchObjectData {
     optional bool productActivated = 10;
     optional string machineGuid = 11;
     optional string launchPartner = 12;
+    optional string installerId = 13;
 }
 
 message AppQuitObjectData {
@@ -379,6 +380,7 @@ message ActivateProductObjectData {
     optional uint32 nbNormalGames = 11;
     optional uint32 nbSteamGames = 12;
     optional string productType = 13;
+    optional string installerId = 14;
 }
 
 message PartyObjectData {

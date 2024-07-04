@@ -34,6 +34,18 @@ message Req {
     optional GearResult gear_result = 5;
 }
 
+message Metrics {
+    required string category = 1;
+    required string name = 2;
+    required MetricType type = 3;
+    required uint32 version = 4;
+    required uint32 value = 5;
+}
+
+message Telemetry {
+    repeated Metrics metrics = 1;
+}
+
 message DependencyRestartRsp {
     optional bool is_approved = 1;
 }
@@ -46,15 +58,26 @@ message CancelInstallPush {
     
 }
 
-message Push {
+message DownPush {
     optional CancelInstallPush cancel_install = 1;
+}
+
+message UpPush {
+    optional Telemetry telemetry = 1;
 }
 
 message Upstream {
     optional Req req = 1;
+    optional UpPush push = 2;
 }
 
 message Downstream {
     optional Rsp rsp = 1;
-    optional Push push = 2;
+    optional DownPush push = 2;
+}
+
+enum MetricType {
+    Undefined = 0;
+    UpCounter = 1;
+    UpDownCounter = 2;
 }
