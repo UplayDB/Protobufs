@@ -81,6 +81,7 @@ message Account {
     optional string nameOnPlatform = 3;
     optional string email = 4;
     optional string password = 5;
+    optional string country = 6;
 }
 
 message Overlay {
@@ -767,9 +768,20 @@ message ProductUpdatedPush {
     optional uint32 balance = 4;
 }
 
+message ProductTrackAddonReq {
+    required uint32 requestId = 1;
+    required uint32 addonId = 2;
+}
+
+message ProductTrackAddonRsp {
+    required uint32 requestId = 1;
+    required OperationResult result = 2;
+}
+
 message ProductReq {
     optional GetProductListReq getProductListReq = 1;
     optional ProductConsumeReq productConsumeReq = 2;
+    optional ProductTrackAddonReq productTrackAddonReq = 3;
 }
 
 message ProductRsp {
@@ -777,6 +789,7 @@ message ProductRsp {
     optional ProductConsumeRsp productConsumeRsp = 2;
     optional ProductAddedPush productAddedPush = 3;
     optional ProductUpdatedPush productUpdatedPush = 4;
+    optional ProductTrackAddonRsp productTrackAddonRsp = 5;
 }
 
 message StoreProduct {
@@ -1470,6 +1483,7 @@ enum OperationResult {
     unavailable = 8;
     declined = 9;
     internalError = 10;
+    unauthorizedAction = 11;
 }
 
 enum ResponseCode {

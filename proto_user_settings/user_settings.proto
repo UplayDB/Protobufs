@@ -10,12 +10,20 @@ message HiddenGame {
     required uint32 productId = 1;
 }
 
+message SteamGame {
+    required uint32 productId = 1;
+}
+
 message FavouriteGames {
     repeated FavouriteGame games = 1;
 }
 
 message HiddenGames {
     repeated HiddenGame games = 1;
+}
+
+message SteamGames {
+    repeated SteamGame games = 1;
 }
 
 message PlayedGame {
@@ -123,6 +131,7 @@ message UserSettings {
     optional bool isunavailablebannerdisabled = 25;
     optional SpotlightShownTimestamps spotlightShownTimestamps = 26;
     optional bool connectBetaPromoDismissed = 27;
+    optional SteamGames steamGames = 28;
 }
 
 enum GameLibraryStyle {

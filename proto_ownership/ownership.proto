@@ -12,6 +12,8 @@ message StoreData {
 message UbiServicesDynamicConfig {
     optional string luna_app_id = 1;
     optional string gfn_app_id = 2;
+    optional string blacknut_app_id = 3;
+    optional string ubi_streaming_app_id = 4;
 }
 
 message OwnedGame {
@@ -434,6 +436,8 @@ message GetUplayPCTicketReq {
         Normal = 0;
         Luna = 1;
         GFN = 2;
+        Blacknut = 3;
+        UbiStreaming = 4;
     }
 }
 
