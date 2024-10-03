@@ -57,6 +57,7 @@ message KnownBranch {
     optional string password = 4;
     optional string branchIdStr = 5;
     optional string branchUuid = 6;
+    optional bool isDefault = 7;
 }
 
 message KnownBranches {

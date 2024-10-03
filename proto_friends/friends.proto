@@ -207,7 +207,7 @@ message GetBlacklistReq {
     optional string user = 1;
 }
 
-message GetBlacklistRsp {
+message DeprecatedGetBlacklistRsp {
     optional bool success = 1;
     repeated string blacklist = 2;
 }
@@ -216,7 +216,7 @@ message AddToBlacklistReq {
     required Friend user = 1;
 }
 
-message AddToBlacklistRsp {
+message DeprecatedAddToBlacklistRsp {
     required bool ok = 1;
 }
 
@@ -240,7 +240,7 @@ message RemoveFromBlacklistReq {
     required Friend user = 1;
 }
 
-message RemoveFromBlacklistRsp {
+message DeprecatedRemoveFromBlacklistRsp {
     required bool ok = 1;
 }
 
@@ -332,10 +332,10 @@ message Rsp {
     optional DeprecatedInitializeRsp deprecated_initialize_rsp = 2;
     optional GetRelationshipsListRsp deprecated_get_relationships_list_rsp = 3;
     optional AcceptFriendshipRsp accept_friendship_rsp = 4;
-    optional AddToBlacklistRsp add_to_blacklist_rsp = 5;
+    optional DeprecatedAddToBlacklistRsp add_to_blacklist_rsp = 5;
     optional ClearRelationshipRsp clear_relationship_rsp = 6;
     optional DeclineFriendshipRsp decline_friendship_rsp = 7;
-    optional RemoveFromBlacklistRsp remove_from_blacklist_rsp = 8;
+    optional DeprecatedRemoveFromBlacklistRsp remove_from_blacklist_rsp = 8;
     optional RequestFriendshipRsp deprecated_request_friendship_rsp = 9;
     optional FindFriendRsp find_friend_rsp = 10;
     optional GetStatusRsp deprecated_get_status_rsp = 11;
@@ -350,7 +350,7 @@ message Rsp {
     optional UbiTicketRefreshRsp ubi_ticket_refresh_rsp = 21;
     optional InitializeRsp initialize_rsp = 22;
     optional SetNicknameRsp set_nickname_rsp = 23;
-    optional GetBlacklistRsp get_blacklist_rsp = 24;
+    optional DeprecatedGetBlacklistRsp get_blacklist_rsp = 24;
 }
 
 message PushUpdatedRelationship {
