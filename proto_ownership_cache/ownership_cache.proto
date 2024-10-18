@@ -24,7 +24,7 @@ message OwnedGame {
     enum TargetPartner {
         TargetPartner_None = 0;
         TargetPartner_EpicGames = 1;
-        TargetPartner_Neowiz = 2;
+        TargetPartner_Neowiz = 2 [deprecated = true];
         TargetPartner_Microsoft = 3;
     }
     

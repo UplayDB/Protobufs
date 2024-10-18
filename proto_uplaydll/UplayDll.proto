@@ -1313,6 +1313,16 @@ message LaunchAppRsp {
     required GameLaunchResult result = 1;
 }
 
+message CrossBootAllowedReq {
+    required uint32 requestId = 1;
+    required uint32 productId = 2;
+}
+
+message CrossBootAllowedRsp {
+    required uint32 requestId = 1;
+    required bool isAllowed = 2;
+}
+
 message GetStreamingCurrentUserCountryReq {
     
 }
@@ -1448,6 +1458,7 @@ message Req {
     optional UserReqV2 userReqV2 = 25;
     optional LaunchAppReq launchAppReq = 26;
     optional StreamingReq streamingReq = 27;
+    optional CrossBootAllowedReq crossBootAllowedReq = 28;
 }
 
 message Rsp {
@@ -1470,6 +1481,7 @@ message Rsp {
     optional TerminateGamePush terminateGamePush = 18;
     optional LaunchAppRsp launchAppRsp = 19;
     optional StreamingRsp streamingRsp = 20;
+    optional CrossBootAllowedRsp crossBootAllowedRsp = 21;
 }
 
 enum OperationResult {
@@ -1582,7 +1594,7 @@ enum CheckoutResult {
 enum TargetPartner {
     TargetPartner_None = 0;
     TargetPartner_EpicGames = 1;
-    TargetPartner_Neowiz = 2;
+    TargetPartner_Neowiz = 2 [deprecated = true];
     TargetPartner_Microsoft = 3;
 }
 

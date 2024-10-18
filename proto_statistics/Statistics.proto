@@ -761,7 +761,6 @@ message StreamingVGPEvent {
 message StreamingHostLinkCreatedEvent {
     optional string hostPeerId = 1;
     optional string spaceIdGame = 2;
-    optional string source = 3;
 }
 
 message EventTypeData {
@@ -812,8 +811,8 @@ message ServicesErrorData {
 
 message PlaySessionEventData {
     optional uint32 brand = 1;
-    optional uint32 gameId = 2;
-    optional bool isSuccessful = 3;
+    optional uint32 productId = 2;
+    optional uint32 success = 3;
     optional string failReason = 4;
     optional string customData = 5;
 }

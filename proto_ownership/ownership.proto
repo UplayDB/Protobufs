@@ -81,7 +81,7 @@ message OwnedGame {
     enum TargetPartner {
         TargetPartner_None = 0;
         TargetPartner_EpicGames = 1;
-        TargetPartner_Neowiz = 2;
+        TargetPartner_Neowiz = 2 [deprecated = true];
         TargetPartner_Microsoft = 3;
     }
     
@@ -141,7 +141,7 @@ message InitializeReq {
     }
     
     optional bool use_staging = 5 [default = false];
-    repeated string claims = 6;
+    repeated string claims = 6 [deprecated = true];
     optional uint32 client_ip_override = 99 [deprecated = true];
 }
 
@@ -152,7 +152,7 @@ message InitializeRsp {
     optional uint32 key_spam_ban_seconds = 4;
     optional SubscriptionState subscription_state = 5;
     optional uint32 subscription_type = 6;
-    optional OwnedGames claimed_games = 7;
+    optional OwnedGames claimed_games = 7 [deprecated = true];
 }
 
 message DeprecatedGetProductFromCdKeyReq {
@@ -194,6 +194,7 @@ message RegisterOwnershipReq {
         ActivationMode_SwitchStreaming = 5;
         ActivationMode_EquinoxStreaming = 6;
         ActivationMode_GFNStreaming = 7;
+        ActivationMode_BlacknutStreaming = 8;
     }
 }
 
@@ -593,7 +594,7 @@ message Req {
     optional SignOwnershipReq sign_ownership_req = 26;
     optional RegisterOwnershipFromWeGameReq register_ownership_from_wegame_req = 27;
     optional OwnershipTokenReq ownership_token_req = 28;
-    optional RegisterTemporaryOwnershipReq register_temporary_ownership_req = 29;
+    optional RegisterTemporaryOwnershipReq register_temporary_ownership_req = 29 [deprecated = true];
     optional string ubi_ticket = 30;
     optional string ubi_session_id = 31;
     
@@ -622,7 +623,7 @@ message Rsp {
     optional SignOwnershipRsp sign_ownership_rsp = 25;
     optional RegisterOwnershipFromWeGameRsp register_ownership_from_wegame_rsp = 26;
     optional OwnershipTokenRsp ownership_token_rsp = 27;
-    optional RegisterTemporaryOwnershipRsp register_temporary_ownership_rsp = 28;
+    optional RegisterTemporaryOwnershipRsp register_temporary_ownership_rsp = 28 [deprecated = true];
     
     reserved 11, 14;
 }

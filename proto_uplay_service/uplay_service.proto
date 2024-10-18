@@ -1,57 +1,75 @@
-syntax = "proto2";
+syntax = "proto3";
 
 package mg.protocol.uplay_service;
 
-message StartInstall {
-    required uint32 uplay_id = 1;
-}
-
-message InstallingDependency {
-    required string description = 1;
-    required uint32 index_number = 2;
-    required uint32 installers_count = 3;
-}
-
-message DependencyInstalled {
-    required string installer_id = 1;
-    required uint32 version = 2;
-    required bool restart_required = 3;
-}
-
-message InstallCompleted {
-    required bool restart_required = 1;
-}
-
-message GearResult {
-    required string result = 1;
-}
-
-message Req {
-    optional StartInstall start_install = 1;
-    optional InstallingDependency installing_dependency = 2;
-    optional DependencyInstalled dependency_installed = 3;
-    optional InstallCompleted install_completed = 4;
-    optional GearResult gear_result = 5;
-}
-
 message Metrics {
-    required string category = 1;
-    required string name = 2;
-    required MetricType type = 3;
-    required uint32 version = 4;
-    required uint32 value = 5;
+    string category = 1;
+    string name = 2;
+    MetricType type = 3;
+    uint32 version = 4;
+    uint32 value = 5;
 }
 
 message Telemetry {
     repeated Metrics metrics = 1;
 }
 
+message StartInstall {
+    uint32 uplay_id = 1;
+}
+
+message InstallingDependency {
+    string description = 1;
+    uint32 index_number = 2;
+    uint32 installers_count = 3;
+}
+
+message DependencyInstalled {
+    string installer_id = 1;
+    uint32 version = 2;
+    bool restart_required = 3;
+}
+
+message InstallCompleted {
+    bool restart_required = 1;
+}
+
+message GearResult {
+    string result = 1;
+}
+
+message Req {
+    oneof _start_install {
+        StartInstall start_install = 1;
+    }
+    
+    oneof _installing_dependency {
+        InstallingDependency installing_dependency = 2;
+    }
+    
+    oneof _dependency_installed {
+        DependencyInstalled dependency_installed = 3;
+    }
+    
+    oneof _install_completed {
+        InstallCompleted install_completed = 4;
+    }
+    
+    oneof _gear_result {
+        GearResult gear_result = 5;
+    }
+}
+
 message DependencyRestartRsp {
-    optional bool is_approved = 1;
+    oneof _is_approved {
+        bool is_approved = 1;
+    }
 }
 
 message Rsp {
-    optional DependencyRestartRsp restart = 1;
+    oneof _restart {
+        DependencyRestartRsp restart = 1;
+    }
 }
 
 message CancelInstallPush {
@@ -59,25 +77,186 @@ message CancelInstallPush {
 }
 
 message DownPush {
-    optional CancelInstallPush cancel_install = 1;
+    oneof _cancel_install {
+        CancelInstallPush cancel_install = 1;
+    }
 }
 
 message UpPush {
-    optional Telemetry telemetry = 1;
+    oneof _telemetry {
+        Telemetry telemetry = 1;
+    }
+}
+
+message GearReq {
+    string output_file = 1;
+    string cache_file = 2;
+    bool check_test_signing = 3;
+}
+
+message GearRsp {
+    string result = 1;
+}
+
+message UpdateGearCacheReq {
+    string cache_file = 1;
+}
+
+message UpdateGearCacheRsp {
+    
+}
+
+message GameInstallReq {
+    uint32 uplay_id = 1;
+    string language = 2;
+}
+
+message GameInstallRsp {
+    bool system_restart_required = 1;
+}
+
+message WriteGameRegistryReq {
+    uint32 uplay_id = 1;
+    string name = 2;
+    string publisher = 3;
+    string icon_file = 4;
+    string help_url = 5;
+    string about_url = 6;
+}
+
+message WriteGameRegistryRsp {
+    
+}
+
+message SystemRestartReq {
+    
+}
+
+message SystemRestartRsp {
+    
+}
+
+message GameUninstallReq {
+    uint32 uplay_id = 1;
+}
+
+message GameUninstallRsp {
+    
+}
+
+message GrantFilePermissionsReq {
+    string path = 1;
+}
+
+message GrantFilePermissionsRsp {
+    
+}
+
+message DependencyInstallationStarted {
+    uint32 uplay_id = 1;
+    string description = 2;
+    uint32 index_number = 3;
+    uint32 installers_count = 4;
+}
+
+message DependencyInstallationCompleted {
+    uint32 uplay_id = 1;
+    string installer_id = 2;
+    uint32 version = 3;
+}
+
+message GameInstallInterruped {
+    
+}
+
+message v1Req {
+    uint32 request_id = 1;
+    
+    oneof request {
+        GearReq gear = 2;
+        UpdateGearCacheReq update_gear_cache = 3;
+        GameInstallReq game_install = 4;
+        WriteGameRegistryReq write_game_registry = 5;
+        SystemRestartReq system_restart = 6;
+        GameUninstallReq game_uninstall = 7;
+        GrantFilePermissionsReq grant_file_permissions = 8;
+    }
+}
+
+message v1Rsp {
+    uint32 request_id = 1;
+    UplayServiceExitCode exit_code = 2;
+    
+    oneof response {
+        GearRsp gear = 3;
+        UpdateGearCacheRsp update_gear_cache = 4;
+        GameInstallRsp game_install = 5;
+        WriteGameRegistryRsp write_game_registry = 6;
+        SystemRestartRsp system_restart = 7;
+        GameUninstallRsp game_uninstall = 8;
+        GrantFilePermissionsRsp grant_file_permissions = 9;
+    }
+}
+
+message v1Push {
+    oneof push {
+        Telemetry telemetry = 1;
+        DependencyInstallationStarted dependency_installation_started = 2;
+        DependencyInstallationCompleted dependency_installation_completed = 3;
+    }
+}
+
+message v1Interrupt {
+    uint32 request_id = 1;
+    
+    oneof interruped {
+        GameInstallInterruped game_install = 2;
+    }
 }
 
 message Upstream {
-    optional Req req = 1;
-    optional UpPush push = 2;
+    oneof message {
+        v1Req v1_req = 3;
+        v1Interrupt v1_interrupt = 4;
+    }
+    
+    oneof _rsp {
+        Rsp rsp = 1;
+    }
+    
+    oneof _push {
+        DownPush push = 2;
+    }
 }
 
 message Downstream {
-    optional Rsp rsp = 1;
-    optional DownPush push = 2;
+    oneof message {
+        v1Rsp v1_rsp = 3;
+        v1Push v1_push = 4;
+    }
+    
+    oneof _req {
+        Req req = 1;
+    }
+    
+    oneof _push {
+        UpPush push = 2;
+    }
 }
 
 enum MetricType {
     Undefined = 0;
     UpCounter = 1;
     UpDownCounter = 2;
+}
+
+enum UplayServiceExitCode {
+    Unset = 0;
+    Success = 1;
+    InsufficientPrivileges = 2;
+    GenericError = 3;
+    InstallerFailed = 4;
+    UnexpectedError = 5;
+    TargetDirNameLengthError = 6;
+    FailedToStart = 7;
 }
