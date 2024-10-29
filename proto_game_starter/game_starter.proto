@@ -42,6 +42,7 @@ message SteamInfo {
     optional uint32 steamFreePackageId = 5;
     optional uint32 steamRequiredProductId = 6;
     repeated SteamProofOfPurchase steamProofOfPurchase = 7;
+    optional bool steamIsRunningOnSteamDeck = 8;
 }
 
 message StartReq {
