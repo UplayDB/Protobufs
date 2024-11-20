@@ -35,7 +35,7 @@ message InstallCompleted {
 }
 
 message GearResult {
-    string result = 1;
+    bytes result = 1;
 }
 
 message Req {
@@ -95,7 +95,7 @@ message GearReq {
 }
 
 message GearRsp {
-    string result = 1;
+    bytes result = 1;
 }
 
 message UpdateGearCacheReq {

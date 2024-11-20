@@ -817,6 +817,20 @@ message PlaySessionEventData {
     optional string customData = 5;
 }
 
+message AddOnGameSessionStartEventData {
+    optional uint32 productId = 1;
+    optional uint32 addonId = 2;
+    optional uint32 brand = 3;
+    optional string launchPartner = 4;
+}
+
+message AddOnGameSessionStopEventData {
+    optional uint32 productId = 1;
+    optional uint32 addonId = 2;
+    optional uint32 brand = 3;
+    optional string launchPartner = 4;
+}
+
 message EventObjectData {
     optional GameLaunchObjectData gameLaunch = 1;
     optional UINavObjectData uiNav = 2;
@@ -886,6 +900,8 @@ message EventObjectData {
     optional UIErrorData uiError = 69;
     optional ServicesErrorData servicesError = 70;
     optional PlaySessionEventData playSessionEvent = 71;
+    optional AddOnGameSessionStartEventData addOnGameSessionStartEvent = 72;
+    optional AddOnGameSessionStopEventData addOnGameSessionStopEvent = 73;
     
     reserved 65, 66, 67;
 }

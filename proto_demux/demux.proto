@@ -63,6 +63,7 @@ message ConnectionClosedPush {
         Connection_ForceQuit = 1;
         Connection_MultipleLogin = 2;
         Connection_Banned = 3;
+        Connection_NoAuthFromClient = 4;
     }
 }
 
