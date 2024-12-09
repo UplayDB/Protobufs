@@ -212,6 +212,7 @@ enum Platform {
     Platform_Windows8 = 4;
     Platform_Windows10 = 5;
     Platform_Windows81 = 6;
+    Platform_Windows11 = 7;
 }
 
 enum PlatformType {
