@@ -514,17 +514,6 @@ message AdImpressionObjectData {
     optional string metaTag = 2;
 }
 
-message PromoTabInteractionObjectData {
-    optional string tabName = 1;
-    optional string interactionType = 2;
-    optional string target = 3;
-    optional string sectionName = 4;
-    optional uint32 brandId = 5;
-    optional string url = 6;
-    optional string clientLanguage = 7;
-    optional string ownScenario = 8;
-}
-
 message NewsInteractionObjectData {
     optional string ignId = 1;
     optional string interactionType = 2;
@@ -864,7 +853,6 @@ message EventObjectData {
     optional DiagnosticObjectData diagnostic = 30;
     optional IngameShopActionObjectData ingameShopAction = 31;
     optional IngameShopImpressionObjectData IngameShopImpression = 32;
-    optional PromoTabInteractionObjectData promoTabInteraction = 33;
     optional EmailVerificationObjectData emailVerification = 34;
     optional TwoFAActivationObjectData twoFAActivation = 35;
     optional AdImpressionObjectData adImpression = 36;
@@ -903,7 +891,7 @@ message EventObjectData {
     optional AddOnGameSessionStartEventData addOnGameSessionStartEvent = 72;
     optional AddOnGameSessionStopEventData addOnGameSessionStopEvent = 73;
     
-    reserved 65, 66, 67;
+    reserved 33, 65, 66, 67;
 }
 
 message Event {
