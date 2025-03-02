@@ -215,7 +215,6 @@ message AppStartObjectData {
     optional uint32 patchTime = 4;
     optional uint32 loginTime = 5;
     optional uint32 configTime = 6;
-    optional string optInPatch = 7;
     optional bool offlineStart = 8;
     optional uint32 authType = 9;
     optional bool shopVisible = 10;
@@ -224,7 +223,8 @@ message AppStartObjectData {
     optional bool trustedDevice = 14;
     optional bool verifiedPhone = 15;
     optional string clientLanguage = 16;
-    optional bool betaPopulation = 17;
+    
+    reserved 7, 17;
     
     enum AuthType {
         NORMAL = 0;
@@ -381,18 +381,6 @@ message ActivateProductObjectData {
     optional uint32 nbSteamGames = 12;
     optional string productType = 13;
     optional string installerId = 14;
-}
-
-message PartyObjectData {
-    optional int64 partyId = 1;
-    optional int32 joinedParty = 2;
-    optional int32 leftParty = 3;
-    optional bool isInitiator = 4;
-    optional bool declinedParty = 5;
-    optional int32 productId = 6;
-    optional string activationIds = 7;
-    optional int32 brandId = 8;
-    optional int32 maxPartyMembers = 9;
 }
 
 message AccountCreationObjectData {
@@ -694,6 +682,7 @@ message StreamingErrorData {
     optional string errorType = 2;
     optional string hostPeerId = 3;
     optional string side = 4;
+    optional string streamingService = 5;
 }
 
 message StreamingStatusData {
@@ -780,6 +769,7 @@ message AuthenticationData {
     optional string clientVersion = 3;
     optional string shellVersion = 4;
     optional string customData = 5;
+    optional uint32 authFlowType = 6;
 }
 
 message UIErrorData {
@@ -842,7 +832,6 @@ message EventObjectData {
     optional StreamingSessionObjectData streamingSession = 19;
     optional AccountLinkingObjectData accountLinking = 20;
     optional ChatSessionObjectData chatSession = 21;
-    optional PartyObjectData party = 22;
     optional ChallengeActionObjectData challengeAction = 23;
     optional NewsClickObjectData newsClick = 24;
     optional NewsImpressionObjectData newsImpression = 25;
@@ -891,7 +880,7 @@ message EventObjectData {
     optional AddOnGameSessionStartEventData addOnGameSessionStartEvent = 72;
     optional AddOnGameSessionStopEventData addOnGameSessionStopEvent = 73;
     
-    reserved 33, 65, 66, 67;
+    reserved 22, 33, 65, 66, 67;
 }
 
 message Event {

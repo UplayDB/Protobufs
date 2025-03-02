@@ -14,80 +14,6 @@ message Telemetry {
     repeated Metrics metrics = 1;
 }
 
-message StartInstall {
-    uint32 uplay_id = 1;
-}
-
-message InstallingDependency {
-    string description = 1;
-    uint32 index_number = 2;
-    uint32 installers_count = 3;
-}
-
-message DependencyInstalled {
-    string installer_id = 1;
-    uint32 version = 2;
-    bool restart_required = 3;
-}
-
-message InstallCompleted {
-    bool restart_required = 1;
-}
-
-message GearResult {
-    bytes result = 1;
-}
-
-message Req {
-    oneof _start_install {
-        StartInstall start_install = 1;
-    }
-    
-    oneof _installing_dependency {
-        InstallingDependency installing_dependency = 2;
-    }
-    
-    oneof _dependency_installed {
-        DependencyInstalled dependency_installed = 3;
-    }
-    
-    oneof _install_completed {
-        InstallCompleted install_completed = 4;
-    }
-    
-    oneof _gear_result {
-        GearResult gear_result = 5;
-    }
-}
-
-message DependencyRestartRsp {
-    oneof _is_approved {
-        bool is_approved = 1;
-    }
-}
-
-message Rsp {
-    oneof _restart {
-        DependencyRestartRsp restart = 1;
-    }
-}
-
-message CancelInstallPush {
-    
-}
-
-message DownPush {
-    oneof _cancel_install {
-        CancelInstallPush cancel_install = 1;
-    }
-}
-
-message UpPush {
-    oneof _telemetry {
-        Telemetry telemetry = 1;
-    }
-}
-
 message GearReq {
     string output_file = 1;
     string cache_file = 2;
@@ -220,13 +146,7 @@ message Upstream {
         v1Interrupt v1_interrupt = 4;
     }
     
-    oneof _rsp {
-        Rsp rsp = 1;
-    }
-    
-    oneof _push {
-        DownPush push = 2;
-    }
+    reserved 1, 2;
 }
 
 message Downstream {
@@ -235,13 +155,7 @@ message Downstream {
         v1Push v1_push = 4;
     }
     
-    oneof _req {
-        Req req = 1;
-    }
-    
-    oneof _push {
-        UpPush push = 2;
-    }
+    reserved 1, 2;
 }
 
 enum MetricType {
@@ -259,4 +173,5 @@ enum UplayServiceExitCode {
     UnexpectedError = 5;
     TargetDirNameLengthError = 6;
     FailedToStart = 7;
+    NoWorkDoneError = 8;
 }

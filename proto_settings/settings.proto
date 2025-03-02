@@ -36,7 +36,6 @@ message SettingsModel {
     optional Hotkey hotkeys_overlayHide = 10;
     optional Hotkey hotkeys_captureScreenshot = 11;
     optional Downloads downloads = 12;
-    optional Betas betas = 13;
     optional AutoPatching autoPatching = 14;
     optional Spotlight spotlight = 15;
     optional ModelessPositions modeless_positions = 16;
@@ -44,6 +43,7 @@ message SettingsModel {
     optional Epic epic = 18;
     optional BrandedInstaller branded_installer = 19;
     optional SharePlay sharePlay = 20;
-    optional ConnectView connect_view = 21;
     optional RemotePlay remotePlay = 22;
+    
+    reserved 21, 13;
 }

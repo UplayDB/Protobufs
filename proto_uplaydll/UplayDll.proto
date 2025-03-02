@@ -249,119 +249,6 @@ message GameSession {
     optional GameSessionJoinability joinability = 3;
 }
 
-message UserData {
-    required bytes data = 1;
-}
-
-message Guest {
-    required string name = 1;
-}
-
-message PartyMember {
-    required string accountId = 1;
-    required string name = 2;
-    optional uint64 gameSessionId = 3;
-    optional bytes gameSessionData = 4;
-    optional Guest guest = 5;
-    optional bytes userData = 6;
-}
-
-message InitPartyReq {
-    required bool enableGameInviteReceivedEvent = 1;
-    required bool enableGuests = 2;
-}
-
-message InitPartyRsp {
-    required string accountId = 1;
-}
-
-message InviteToPartyReq {
-    required uint32 requestId = 1;
-    required string accountId = 2;
-}
-
-message InviteToPartyRsp {
-    required uint32 requestId = 1;
-    required OperationResult result = 2;
-}
-
-message InvitePartyToGameReq {
-    required uint32 requestId = 1;
-}
-
-message InvitePartyToGameRsp {
-    required uint32 requestId = 1;
-    required OperationResult result = 2;
-}
-
-message ShowGameInviteOverlayUIReq {
-    required uint32 inviteId = 1;
-    required GameSession gameSession = 2;
-}
-
-message PartyListUpdatedPush {
-    repeated PartyMember members = 1;
-    required string leader = 2;
-    optional uint64 partyId = 3;
-}
-
-message SetUserDataReq {
-    required bytes data = 1;
-}
-
-message PromoteToLeaderReq {
-    required uint32 requestId = 1;
-    required string accountId = 2;
-}
-
-message PromoteToLeaderRsp {
-    required uint32 requestId = 1;
-    required OperationResult result = 2;
-}
-
-message SetInPartyGameSessionReq {
-    
-}
-
-message GameInvitePush {
-    required uint32 inviteId = 1;
-    required GameSession gameSession = 2;
-    required string fromAccountId = 3;
-}
-
-message GameInviteAcceptedPush {
-    required uint32 inviteId = 1;
-}
-
-message GameInviteDeclinedPush {
-    required uint32 inviteId = 1;
-}
-
-message PartyInvitePush {
-    required string accountId = 1;
-}
-
-message PartyReq {
-    optional InitPartyReq initPartyReq = 1;
-    optional InviteToPartyReq inviteToPartyReq = 2;
-    optional InvitePartyToGameReq invitePartyToGameReq = 3;
-    optional SetUserDataReq setUserDataReq = 4;
-    optional PromoteToLeaderReq promoteToLeaderReq = 5;
-    optional ShowGameInviteOverlayUIReq gameInviteOverlayUIReq = 8;
-}
-
-message PartyRsp {
-    optional InitPartyRsp initPartyRsp = 1;
-    optional PartyListUpdatedPush listUpdatePush = 2;
-    optional GameInviteAcceptedPush gameInviteAcceptedPush = 3;
-    optional GameInviteDeclinedPush gameInviteDeclinedPush = 4;
-    optional InvitePartyToGameRsp invitePartyToGameRsp = 5;
-    optional InviteToPartyRsp inviteToPartyRsp = 6;
-    optional GameInvitePush gameInvitePush = 7;
-    optional PromoteToLeaderRsp promoteToLeaderRsp = 9;
-    optional PartyInvitePush partyInvitePush = 10;
-}
-
 message SetGameSessionReq {
     required GameSession gameSession = 1;
 }
@@ -1400,6 +1287,26 @@ message GetStreamingResolutionRsp {
     optional Dimension2d streamingResolution = 1;
 }
 
+message OpenStreamingTextEntryReq {
+    required uint32 xPosition = 1;
+    required uint32 yPosition = 2;
+    required uint32 width = 3;
+    required uint32 height = 4;
+    required TextEntryMode mode = 5;
+}
+
+message OpenStreamingTextEntryRsp {
+    required uint32 handle = 1;
+}
+
+message CloseStreamingTextEntryReq {
+    required uint32 handle = 1;
+}
+
+message CloseStreamingTextEntryRsp {
+    
+}
+
 message StreamingReq {
     required uint32 requestId = 1;
     
@@ -1413,6 +1320,8 @@ message StreamingReq {
         GetStreamingInputTypeReq getStreamingInputTypeReq = 8;
         GetStreamingInputGamepadTypeReq getStreamingInputGamepadTypeReq = 9;
         GetStreamingResolutionReq GetStreamingResolutionReq = 10;
+        OpenStreamingTextEntryReq OpenStreamingTextEntryReq = 11;
+        CloseStreamingTextEntryReq CloseStreamingTextEntryReq = 12;
     }
 }
 
@@ -1430,6 +1339,8 @@ message StreamingRsp {
         GetStreamingInputTypeRsp getStreamingInputTypeRsp = 9;
         GetStreamingInputGamepadTypeRsp getStreamingInputGamepadTypeRsp = 10;
         GetStreamingResolutionRsp GetStreamingResolutionRsp = 11;
+        OpenStreamingTextEntryRsp OpenStreamingTextEntryRsp = 12;
+        CloseStreamingTextEntryRsp CloseStreamingTextEntryRsp = 13;
     }
 }
 
@@ -1437,7 +1348,6 @@ message Req {
     optional InitReq initReq = 1;
     optional InitProcessReq initProcessReq = 2;
     optional WriteAchievementsReq writeAchievementsReq = 3;
-    optional PartyReq partyReq = 4;
     optional SetGameSessionReq setGameSessionReq = 5;
     optional ClearGameSessionReq clearGameSessionReq = 6;
     optional FriendsReq friendsReq = 7;
@@ -1459,13 +1369,14 @@ message Req {
     optional LaunchAppReq launchAppReq = 26;
     optional StreamingReq streamingReq = 27;
     optional CrossBootAllowedReq crossBootAllowedReq = 28;
+    
+    reserved 4;
 }
 
 message Rsp {
     optional InitRsp initRsp = 1;
     optional InitProcessRsp initProcessRsp = 13;
     optional WriteAchievementsRsp writeAchievementsRsp = 2;
-    optional PartyRsp partyRsp = 3;
     optional FriendsRsp friendsRsp = 4;
     optional AchievementRsp achievementRsp = 5;
     optional OverlayRsp overlayRsp = 6;
@@ -1482,6 +1393,8 @@ message Rsp {
     optional LaunchAppRsp launchAppRsp = 19;
     optional StreamingRsp streamingRsp = 20;
     optional CrossBootAllowedRsp crossBootAllowedRsp = 21;
+    
+    reserved 3;
 }
 
 enum OperationResult {
@@ -1658,4 +1571,15 @@ enum GamepadType {
     GamepadType_Generic = 1;
     GamepadType_Nintendo = 2;
     GamepadType_PlayStation = 3;
+}
+
+enum TextEntryMode {
+    TextEntryMode_Default = 0;
+    TextEntryMode_Password = 1;
+    TextEntryMode_Text = 2;
+    TextEntryMode_Search = 3;
+    TextEntryMode_Url = 4;
+    TextEntryMode_Number = 5;
+    TextEntryMode_Tel = 6;
+    TextEntryMode_Email = 7;
 }

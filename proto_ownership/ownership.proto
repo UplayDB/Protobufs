@@ -216,10 +216,12 @@ message RegisterOwnershipSteamPopRsp {
         Result_InvalidTicket = 2;
         Result_TicketsAlreadyClaimed = 3;
         Result_NoPackagesFound = 4;
+        Result_TimedOut = 5;
     }
     
     repeated string configuration = 2;
     repeated string tickets_claimed_by_other = 3;
+    repeated string tickets_claimed_by_other_account_hint = 4;
 }
 
 message RegisterOwnershipFromOculusReq {

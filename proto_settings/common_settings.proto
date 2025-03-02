@@ -12,6 +12,7 @@ message User {
     optional bool start_on_windows_start = 5 [default = false];
     optional bool non_friend_game_invite_enabled = 6 [default = true];
     optional bool landingpage_set_by_user = 7 [default = false];
+    optional bool assume_minor_account = 8 [default = false];
 }
 
 message Overlay {
@@ -65,10 +66,6 @@ message Downloads {
     optional bool pauseOnGameLaunch = 3 [default = true];
 }
 
-message Betas {
-    optional bool optIn = 1 [default = false];
-}
-
 message AutoPatching {
     optional bool enabled = 1 [default = true];
 }
@@ -87,11 +84,6 @@ message Epic {
 
 message BrandedInstaller {
     optional string pending_protocol = 1;
-}
-
-message ConnectView {
-    optional bool enabled = 1 [default = false];
-    optional bool default_opt_out = 2 [default = false];
 }
 
 message SharePlay {

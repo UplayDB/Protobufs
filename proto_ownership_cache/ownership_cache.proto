@@ -31,8 +31,9 @@ message OwnedGame {
     optional ActivationType activation_type = 18;
     enum ActivationType {
         ActivationType_Purchase = 0;
-        ActivationType_Trial = 1;
+        ActivationType_Trial = 1 [deprecated = true];
         ActivationType_Subscription = 2;
+        ActivationType_Unknown = 13;
     }
     
     optional string ubiServices_app_id = 19;
