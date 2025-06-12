@@ -128,6 +128,19 @@ message OwnedGames {
     repeated OwnedGame owned_games = 1;
 }
 
+message GetUplayPCTicketReq {
+    required uint32 uplay_id = 1;
+    
+    optional Platform platform = 2;
+    enum Platform {
+        Normal = 0;
+        Luna = 1;
+        GFN = 2;
+        Blacknut = 3;
+        UbiStreaming = 4;
+    }
+}
+
 message InitializeReq {
     optional bool deprecated_test_config = 1;
     optional bool get_associations = 2;
@@ -143,6 +156,7 @@ message InitializeReq {
     optional bool use_staging = 5 [default = false];
     repeated string claims = 6 [deprecated = true];
     optional uint32 client_ip_override = 99 [deprecated = true];
+    optional GetUplayPCTicketReq get_uplay_pc_ticket = 7;
 }
 
 message InitializeRsp {
@@ -153,6 +167,7 @@ message InitializeRsp {
     optional SubscriptionState subscription_state = 5;
     optional uint32 subscription_type = 6;
     optional OwnedGames claimed_games = 7 [deprecated = true];
+    optional string uplay_pc_ticket = 8;
 }
 
 message DeprecatedGetProductFromCdKeyReq {
@@ -431,19 +446,6 @@ message UnlockProductBranchRsp {
     }
 }
 
-message GetUplayPCTicketReq {
-    required uint32 uplay_id = 1;
-    
-    optional Platform platform = 2;
-    enum Platform {
-        Normal = 0;
-        Luna = 1;
-        GFN = 2;
-        Blacknut = 3;
-        UbiStreaming = 4;
-    }
-}
-
 message GetUplayPCTicketRsp {
     required bool success = 1;
     optional string uplay_pc_ticket = 2;
@@ -455,6 +457,7 @@ message GetUplayPCTicketRsp {
         ErrorCode_ProductSuspended = 3;
         ErrorCode_ProductSubscriptionLocked = 4;
         ErrorCode_ProductNotReleased = 5;
+        ErrorCode_ProductNotFound = 6;
     }
 }
 

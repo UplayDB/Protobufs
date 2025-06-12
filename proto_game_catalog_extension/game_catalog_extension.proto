@@ -60,6 +60,7 @@ message LaunchGameRsp {
     enum Result {
         InternalError = 0;
         Success = 1;
+        LaunchNotPermitted = 2;
     }
     
     string reason = 2;
@@ -245,6 +246,10 @@ message GameEnded {
     uint32 product_id = 1;
 }
 
+message ReconnectPush {
+    
+}
+
 message Req {
     uint32 request_id = 1;
     
@@ -271,6 +276,7 @@ message Rsp {
 
 message Push {
     oneof push {
+        ReconnectPush reconnectPush = 1;
         GameLaunched game_launched = 102;
         GameEnded game_ended = 103;
         ProductActionsUpdated product_actions_updated = 201;
