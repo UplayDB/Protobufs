@@ -21,10 +21,21 @@ message GetGameTimeTokenRsp {
     uint32 time_token_ttl_sec = 2;
 }
 
+message GetOwnershipListTokenReq {
+    uint32 product_id = 1;
+    bytes game_token = 2;
+    repeated uint32 addons_to_validate = 3;
+}
+
+message GetOwnershipListTokenRsp {
+    bytes ownership_list_token = 1;
+}
+
 message Req {
     uint32 request_id = 1;
     GetGameTokenReq get_game_token_req = 2;
     GetGameTimeTokenReq get_game_time_token_req = 3;
+    GetOwnershipListTokenReq get_ownership_list_token_req = 4;
 }
 
 message Rsp {
@@ -43,6 +54,7 @@ message Rsp {
     
     GetGameTokenRsp get_game_token_rsp = 3;
     GetGameTimeTokenRsp get_game_time_token_rsp = 4;
+    GetOwnershipListTokenRsp get_ownership_list_token_rsp = 5;
 }
 
 message Upstream {

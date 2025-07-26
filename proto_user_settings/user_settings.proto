@@ -133,7 +133,6 @@ message UserSettings {
     optional SpotlightShownTimestamps spotlightShownTimestamps = 26;
     optional bool connectBetaPromoDismissed = 27;
     optional SteamGames steamGames = 28;
-    optional bool seenDiscoveryNotif = 29;
 }
 
 enum GameLibraryStyle {

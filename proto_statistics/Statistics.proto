@@ -810,21 +810,6 @@ message AddOnGameSessionStopEventData {
     optional string launchPartner = 4;
 }
 
-message DiscoveryNotificationDisplayedEventData {
-    optional string notificationSource = 1;
-    optional string notificationType = 2;
-    optional uint32 notificationId = 3;
-    optional bool isGameOwned = 4;
-}
-
-message DiscoveryNotificationActionEventData {
-    optional string notificationSource = 1;
-    optional string notificationType = 2;
-    optional uint32 notificationId = 3;
-    optional uint32 actCat = 4;
-    optional bool isGameOwned = 5;
-}
-
 message EventObjectData {
     optional GameLaunchObjectData gameLaunch = 1;
     optional UINavObjectData uiNav = 2;
@@ -894,8 +879,6 @@ message EventObjectData {
     optional PlaySessionEventData playSessionEvent = 71;
     optional AddOnGameSessionStartEventData addOnGameSessionStartEvent = 72;
     optional AddOnGameSessionStopEventData addOnGameSessionStopEvent = 73;
-    optional DiscoveryNotificationDisplayedEventData discoveryNotificationDisplayed = 74;
-    optional DiscoveryNotificationActionEventData discoveryNotificationAction = 75;
     
     reserved 22, 33, 65, 66, 67;
 }

@@ -35,6 +35,7 @@ message UpdateGearCacheRsp {
 message GameInstallReq {
     uint32 uplay_id = 1;
     string language = 2;
+    bool requires_uac = 3;
 }
 
 message GameInstallRsp {
@@ -64,6 +65,7 @@ message SystemRestartRsp {
 
 message GameUninstallReq {
     uint32 uplay_id = 1;
+    bool requires_uac = 2;
 }
 
 message GameUninstallRsp {
