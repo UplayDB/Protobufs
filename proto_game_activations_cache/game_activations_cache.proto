@@ -5,6 +5,7 @@ package mg.protocol.game_activations_cache;
 message ExecutableToken {
     required uint32 exe_index = 1;
     optional string game_token = 3;
+    optional string ownership_list = 4;
 }
 
 message GameActivation {

@@ -14,6 +14,7 @@ message InitReq {
 message InitRsp {
     required InitResult result = 1;
     optional uint32 uplayPID = 2;
+    repeated uint32 addonsToValidate = 3;
 }
 
 message InvalidateCachedTokenReq {
@@ -22,6 +23,7 @@ message InvalidateCachedTokenReq {
 
 message GetCachedOrFreshTokenReq {
     required bytes requestToken = 2;
+    required bool secureDlcEnabled = 3;
 }
 
 message GetBurnTicketReq {
@@ -32,6 +34,7 @@ message GetCachedOrFreshTokenRsp {
     required OperationResult result = 2;
     optional uint32 errorCode = 3;
     optional bytes gameToken = 4;
+    optional bytes ownershipList = 5;
 }
 
 message GetBurnTicketRsp {

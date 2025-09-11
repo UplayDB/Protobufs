@@ -1210,6 +1210,21 @@ message CrossBootAllowedRsp {
     required bool isAllowed = 2;
 }
 
+message CrossBootStatusReq {
+    required uint32 requestId = 1;
+    repeated uint32 productIds = 2;
+}
+
+message CrossBootStatusRsp {
+    required uint32 requestId = 1;
+    
+    repeated Status status = 2;
+    message Status {
+        optional uint32 productId = 1;
+        optional bool isAllowed = 2;
+    }
+}
+
 message GetStreamingCurrentUserCountryReq {
     
 }
@@ -1369,6 +1384,7 @@ message Req {
     optional LaunchAppReq launchAppReq = 26;
     optional StreamingReq streamingReq = 27;
     optional CrossBootAllowedReq crossBootAllowedReq = 28;
+    optional CrossBootStatusReq crossBootStatusReq = 29;
     
     reserved 4;
 }
@@ -1393,6 +1409,7 @@ message Rsp {
     optional LaunchAppRsp launchAppRsp = 19;
     optional StreamingRsp streamingRsp = 20;
     optional CrossBootAllowedRsp crossBootAllowedRsp = 21;
+    optional CrossBootStatusRsp crossBootStatusRsp = 22;
     
     reserved 3;
 }

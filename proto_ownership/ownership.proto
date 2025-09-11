@@ -139,6 +139,8 @@ message GetUplayPCTicketReq {
         Blacknut = 3;
         UbiStreaming = 4;
     }
+    
+    optional uint32 product_id = 3;
 }
 
 message InitializeReq {
