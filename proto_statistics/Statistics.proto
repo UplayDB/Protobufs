@@ -109,6 +109,22 @@ message GameLaunchObjectData {
     optional string installerId = 13;
 }
 
+message GameLaunchErrorObjectData {
+    optional uint32 productId = 1;
+    optional string launchMethod = 2;
+    optional uint32 gameStarterTime = 3;
+    optional string inputSource = 4;
+    optional string steamAccount = 5;
+    optional uint32 brand = 6;
+    optional string activationIds = 7;
+    optional bool shopVisible = 8;
+    optional bool productActivated = 9;
+    optional string machineGuid = 10;
+    optional string launchPartner = 11;
+    optional string installerId = 12;
+    optional string errorCode = 13;
+}
+
 message AppQuitObjectData {
     optional uint32 secondsSinceStart = 2;
     optional uint32 demuxConnectionFailureCount = 3;
@@ -223,6 +239,8 @@ message AppStartObjectData {
     optional bool trustedDevice = 14;
     optional bool verifiedPhone = 15;
     optional string clientLanguage = 16;
+    optional string installerId = 18;
+    optional string launchPartner = 19;
     
     reserved 7, 17;
     
@@ -810,6 +828,21 @@ message AddOnGameSessionStopEventData {
     optional string launchPartner = 4;
 }
 
+message GameStarterErrorData {
+    required string errorCode = 1;
+    optional uint32 productId = 3;
+    optional uint32 brand = 4;
+    optional string steamId = 5;
+}
+
+message DownloadSetupEventData {
+    optional uint32 brand = 1;
+    optional uint32 productId = 2;
+    optional string errorCode = 3;
+    optional string category = 4;
+    optional uint32 success = 5;
+}
+
 message EventObjectData {
     optional GameLaunchObjectData gameLaunch = 1;
     optional UINavObjectData uiNav = 2;
@@ -879,6 +912,9 @@ message EventObjectData {
     optional PlaySessionEventData playSessionEvent = 71;
     optional AddOnGameSessionStartEventData addOnGameSessionStartEvent = 72;
     optional AddOnGameSessionStopEventData addOnGameSessionStopEvent = 73;
+    optional GameStarterErrorData gameStarterError = 74;
+    optional DownloadSetupEventData downloadSetupEvent = 75;
+    optional GameLaunchErrorObjectData gameLaunchError = 76;
     
     reserved 22, 33, 65, 66, 67;
 }

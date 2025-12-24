@@ -126,6 +126,7 @@ message InitRsp {
     optional MultiplayerInit multiplayerInit = 20;
     optional UserInit userInit = 21;
     optional UbiServices ubiServices = 22;
+    optional CrossBootInit crossBootInit = 23;
 }
 
 message InitProcessRsp {
@@ -1192,8 +1193,14 @@ message TerminateGamePush {
     
 }
 
+message LaunchAppParam {
+    required string name = 1;
+    required string value = 2;
+}
+
 message LaunchAppReq {
     required uint32 productId = 1;
+    repeated LaunchAppParam params = 2;
 }
 
 message LaunchAppRsp {
@@ -1223,6 +1230,10 @@ message CrossBootStatusRsp {
         optional uint32 productId = 1;
         optional bool isAllowed = 2;
     }
+}
+
+message CrossBootInit {
+    repeated LaunchAppParam launchParams = 1;
 }
 
 message GetStreamingCurrentUserCountryReq {

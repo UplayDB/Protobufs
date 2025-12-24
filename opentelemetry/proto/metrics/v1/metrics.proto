@@ -1,0 +1,186 @@
+syntax = "proto3";
+
+package opentelemetry.proto.metrics.v1;
+
+import "opentelemetry/proto/common/v1/common.proto";
+import "opentelemetry/proto/resource/v1/resource.proto";
+
+option csharp_namespace = "OpenTelemetry.Proto.Metrics.V1";
+option go_package = "go.opentelemetry.io/proto/otlp/metrics/v1";
+option java_multiple_files = true;
+option java_outer_classname = "MetricsProto";
+option java_package = "io.opentelemetry.proto.metrics.v1";
+
+message MetricsData {
+    repeated ResourceMetrics resource_metrics = 1;
+}
+
+message ResourceMetrics {
+    resource.v1.Resource resource = 1;
+    repeated ScopeMetrics scope_metrics = 2;
+    string schema_url = 3;
+    
+    reserved 1000;
+}
+
+message ScopeMetrics {
+    common.v1.InstrumentationScope scope = 1;
+    repeated Metric metrics = 2;
+    string schema_url = 3;
+}
+
+message Metric {
+    string name = 1;
+    string description = 2;
+    string unit = 3;
+    repeated common.v1.KeyValue metadata = 12;
+    
+    oneof data {
+        Gauge gauge = 5;
+        Sum sum = 7;
+        Histogram histogram = 9;
+        ExponentialHistogram exponential_histogram = 10;
+        Summary summary = 11;
+    }
+    
+    reserved 4, 6, 8;
+}
+
+message Gauge {
+    repeated NumberDataPoint data_points = 1;
+}
+
+message Sum {
+    repeated NumberDataPoint data_points = 1;
+    AggregationTemporality aggregation_temporality = 2;
+    bool is_monotonic = 3;
+}
+
+message Histogram {
+    repeated HistogramDataPoint data_points = 1;
+    AggregationTemporality aggregation_temporality = 2;
+}
+
+message ExponentialHistogram {
+    repeated ExponentialHistogramDataPoint data_points = 1;
+    AggregationTemporality aggregation_temporality = 2;
+}
+
+message Summary {
+    repeated SummaryDataPoint data_points = 1;
+}
+
+message NumberDataPoint {
+    repeated common.v1.KeyValue attributes = 7;
+    fixed64 start_time_unix_nano = 2;
+    fixed64 time_unix_nano = 3;
+    repeated Exemplar exemplars = 5;
+    uint32 flags = 8;
+    
+    oneof value {
+        double as_double = 4;
+        sfixed64 as_int = 6;
+    }
+    
+    reserved 1;
+}
+
+message HistogramDataPoint {
+    repeated common.v1.KeyValue attributes = 9;
+    fixed64 start_time_unix_nano = 2;
+    fixed64 time_unix_nano = 3;
+    fixed64 count = 4;
+    repeated fixed64 bucket_counts = 6;
+    repeated double explicit_bounds = 7;
+    repeated Exemplar exemplars = 8;
+    uint32 flags = 10;
+    
+    oneof _sum {
+        double sum = 5;
+    }
+    
+    oneof _min {
+        double min = 11;
+    }
+    
+    oneof _max {
+        double max = 12;
+    }
+    
+    reserved 1;
+}
+
+message ExponentialHistogramDataPoint {
+    repeated common.v1.KeyValue attributes = 1;
+    fixed64 start_time_unix_nano = 2;
+    fixed64 time_unix_nano = 3;
+    fixed64 count = 4;
+    sint32 scale = 6;
+    fixed64 zero_count = 7;
+    
+    Buckets positive = 8;
+    message Buckets {
+        sint32 offset = 1;
+        repeated uint64 bucket_counts = 2;
+    }
+    
+    Buckets negative = 9;
+    uint32 flags = 10;
+    repeated Exemplar exemplars = 11;
+    double zero_threshold = 14;
+    
+    oneof _sum {
+        double sum = 5;
+    }
+    
+    oneof _min {
+        double min = 12;
+    }
+    
+    oneof _max {
+        double max = 13;
+    }
+}
+
+message SummaryDataPoint {
+    repeated common.v1.KeyValue attributes = 7;
+    fixed64 start_time_unix_nano = 2;
+    fixed64 time_unix_nano = 3;
+    fixed64 count = 4;
+    double sum = 5;
+    
+    repeated ValueAtQuantile quantile_values = 6;
+    message ValueAtQuantile {
+        double quantile = 1;
+        double value = 2;
+    }
+    
+    uint32 flags = 8;
+    
+    reserved 1;
+}
+
+message Exemplar {
+    repeated common.v1.KeyValue filtered_attributes = 7;
+    fixed64 time_unix_nano = 2;
+    bytes span_id = 4;
+    bytes trace_id = 5;
+    
+    oneof value {
+        double as_double = 3;
+        sfixed64 as_int = 6;
+    }
+    
+    reserved 1;
+}
+
+enum AggregationTemporality {
+    AGGREGATION_TEMPORALITY_UNSPECIFIED = 0;
+    AGGREGATION_TEMPORALITY_DELTA = 1;
+    AGGREGATION_TEMPORALITY_CUMULATIVE = 2;
+}
+
+enum DataPointFlags {
+    DATA_POINT_FLAGS_DO_NOT_USE = 0;
+    DATA_POINT_FLAGS_NO_RECORDED_VALUE_MASK = 1;
+}

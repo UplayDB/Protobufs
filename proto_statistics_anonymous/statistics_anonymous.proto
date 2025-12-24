@@ -1,0 +1,60 @@
+syntax = "proto2";
+
+package mg.protocol.statistics_anonymous;
+
+message UpcStartObjectData {
+    required uint32 buildNumber = 1;
+    required string clientVersion = 2;
+    required string platformMode = 3;
+}
+
+message UpcReadyObjectData {
+    required bool success = 1;
+    required string reason = 2;
+    required uint32 authAttempts = 3;
+    required uint32 pcservicesAttempts = 4;
+}
+
+message AuthStartObjectData {
+    required uint32 attempt = 1;
+    required string authFlowType = 2;
+    required string hostName = 3;
+}
+
+message AuthEndObjectData {
+    required uint32 attempt = 1;
+    required string countryCode = 2;
+    required string errorCode = 3;
+    required string serviceFail = 4;
+    required bool success = 5;
+}
+
+message PcServicesStartObjectData {
+    required uint32 attempt = 1;
+    required string hostName = 2;
+}
+
+message PcServicesEndObjectData {
+    required uint32 attempt = 1;
+    required string countryCode = 2;
+    required string errorCode = 3;
+    required bool retry = 4;
+    required string serviceFail = 5;
+    required string servicesName = 6;
+    required bool success = 7;
+}
+
+message EventObjectData {
+    optional UpcStartObjectData upcStart = 1;
+    optional AuthStartObjectData authStart = 2;
+    optional AuthEndObjectData authEnd = 3;
+    optional PcServicesStartObjectData pcServicesStart = 4;
+    optional PcServicesEndObjectData pcServicesEnd = 5;
+    optional UpcReadyObjectData upcReady = 6;
+}
+
+message AnonymousEvent {
+    required string type = 1;
+    required string createdDate = 2;
+    required EventObjectData objData = 3;
+}

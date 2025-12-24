@@ -14,7 +14,7 @@ message AuthDetails {
 
 message InitializeReq {
     AuthDetails auth_details = 1;
-    bool do_activation = 2;
+    bool with_ui = 2;
 }
 
 message IdMappingElement {
@@ -25,21 +25,13 @@ message IdMappingElement {
 message InitializeRsp {
     Result result = 1;
     enum Result {
-        Failure = 0;
+        Undefined = 0;
         Success = 1;
-        AuthenticationFailed = 2;
-        MissingOwnership = 3;
+        InternalError = 2;
+        UserInteractionRequired = 3;
     }
     
     repeated IdMappingElement id_mapping = 2;
-}
-
-message LinkAccountReq {
-    AuthDetails auth_details = 1;
-}
-
-message LinkAccountRsp {
-    bool is_linked = 1;
 }
 
 message CheckUserReq {
@@ -258,8 +250,9 @@ message Req {
         GameRuntimeReq game_run_time = 3;
         ProductManagementReq product_management = 4;
         CheckUserReq check_user = 536870909;
-        LinkAccountReq link_account = 536870910;
     }
+    
+    reserved 536870910;
 }
 
 message Rsp {
@@ -270,8 +263,9 @@ message Rsp {
         GameRuntimeRsp game_run_time = 3;
         ProductManagementRsp product_management = 4;
         CheckUserRsp check_user = 536870909;
-        LinkAccountRsp link_account = 536870910;
     }
+    
+    reserved 536870910;
 }
 
 message Push {

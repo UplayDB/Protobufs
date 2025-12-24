@@ -45,6 +45,17 @@ message SteamInfo {
     optional bool steamIsRunningOnSteamDeck = 8;
 }
 
+message StartReqDiagnostics {
+    repeated DiagnosticEvent events = 2;
+    message DiagnosticEvent {
+        optional int32 code = 1;
+        optional int64 apiError = 2;
+        optional string apiErrorMsg = 3;
+    }
+    
+    reserved 1;
+}
+
 message StartReq {
     required uint32 launcherVersion = 1;
     required uint32 uplayId = 2;
@@ -69,6 +80,7 @@ message StartReq {
     optional NvidiaInfo nvidiaInfo = 19;
     optional WeGameInfo weGameInfo = 20;
     optional SteamInfo steamInfo = 22;
+    optional StartReqDiagnostics diagnostics = 23;
     
     reserved 3, 6, 8, 9, 13, 14, 15, 18, 21;
 }
