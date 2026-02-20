@@ -44,6 +44,7 @@ message SettingsModel {
     optional BrandedInstaller branded_installer = 19;
     optional SharePlay sharePlay = 20;
     optional RemotePlay remotePlay = 22;
+    optional PatchTrigger patchTrigger = 23;
     
     reserved 21, 13;
 }

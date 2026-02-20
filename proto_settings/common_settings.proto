@@ -103,6 +103,10 @@ message RemotePlay {
     optional bool allowed = 1 [default = false];
 }
 
+message PatchTrigger {
+    optional string source = 1 [default = "USER_RESTART"];
+}
+
 enum CloseBehavior {
     CloseBehavior_Undefined = 0;
     CloseBehavior_Close = 1;

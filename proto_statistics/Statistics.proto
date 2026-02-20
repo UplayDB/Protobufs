@@ -192,6 +192,21 @@ message GameCloudSaveSyncObjectData {
     optional uint32 brand = 9;
 }
 
+message GameAchievementSyncObjectData {
+    optional uint32 productId = 1;
+    optional uint32 brand = 2;
+    optional string machineId = 3;
+    
+    optional Error error = 4;
+    enum Error {
+        UNDEFINED = 0;
+        OFFLINEMODE = 1;
+        GAMEACHIEVEMENTSDISABLED = 2;
+        UPCACHIEVEMENTSDISABLED = 3;
+        UNKNOWN = 4;
+    }
+}
+
 message SettingChangedObjectData {
     optional string settingName = 1;
     optional string oldValue = 2;
@@ -843,6 +858,20 @@ message DownloadSetupEventData {
     optional uint32 success = 5;
 }
 
+message ClientPatchDetectedEventData {
+    optional string contract = 1;
+    optional string oldContract = 2;
+}
+
+message ClientPatchUpdateEventData {
+    optional string contract = 1;
+    optional string oldContract = 2;
+    optional string endStatus = 3;
+    optional string errorCode = 4;
+    optional string source = 5;
+    optional string patchApplyCreatedDate = 6;
+}
+
 message EventObjectData {
     optional GameLaunchObjectData gameLaunch = 1;
     optional UINavObjectData uiNav = 2;
@@ -915,6 +944,9 @@ message EventObjectData {
     optional GameStarterErrorData gameStarterError = 74;
     optional DownloadSetupEventData downloadSetupEvent = 75;
     optional GameLaunchErrorObjectData gameLaunchError = 76;
+    optional ClientPatchDetectedEventData clientPatchDetectedEvent = 77;
+    optional ClientPatchUpdateEventData clientPatchUpdateEvent = 78;
+    optional GameAchievementSyncObjectData gameAchievementSync = 79;
     
     reserved 22, 33, 65, 66, 67;
 }
