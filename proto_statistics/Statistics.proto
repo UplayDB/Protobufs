@@ -843,11 +843,19 @@ message AddOnGameSessionStopEventData {
     optional string launchPartner = 4;
 }
 
+message StartActivateProductObjectData {
+    optional uint32 productId = 1;
+    optional uint32 uplayId = 2;
+    optional uint32 activationMode = 3;
+}
+
 message GameStarterErrorData {
     required string errorCode = 1;
     optional uint32 productId = 3;
     optional uint32 brand = 4;
-    optional string steamId = 5;
+    optional string steamAccount = 5;
+    
+    reserved 2;
 }
 
 message DownloadSetupEventData {
@@ -861,6 +869,7 @@ message DownloadSetupEventData {
 message ClientPatchDetectedEventData {
     optional string contract = 1;
     optional string oldContract = 2;
+    optional bool mandatoryOnStartup = 3;
 }
 
 message ClientPatchUpdateEventData {
@@ -870,6 +879,24 @@ message ClientPatchUpdateEventData {
     optional string errorCode = 4;
     optional string source = 5;
     optional string patchApplyCreatedDate = 6;
+}
+
+message CDKeyModalShowData {
+    optional uint32 productId = 1;
+    optional uint32 uplayId = 2;
+    optional uint32 activationMode = 3;
+    
+    optional ReasonCode cdkeyReason = 4;
+    enum ReasonCode {
+        UNKNOWN = 1;
+        NO_OWNERSHIP = 2;
+        GAME_EXPIRATION = 3;
+        UBI_PLUS_ISSUE = 4;
+    }
+}
+
+message PopFailedClaimedOtherData {
+    optional uint32 productId = 1;
 }
 
 message EventObjectData {
@@ -947,6 +974,9 @@ message EventObjectData {
     optional ClientPatchDetectedEventData clientPatchDetectedEvent = 77;
     optional ClientPatchUpdateEventData clientPatchUpdateEvent = 78;
     optional GameAchievementSyncObjectData gameAchievementSync = 79;
+    optional StartActivateProductObjectData startActivateProduct = 80;
+    optional CDKeyModalShowData CDKeyModalShow = 81;
+    optional PopFailedClaimedOtherData popFailedClaimedOther = 82;
     
     reserved 22, 33, 65, 66, 67;
 }

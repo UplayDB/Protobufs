@@ -60,7 +60,6 @@ message StartReq {
     required uint32 launcherVersion = 1;
     required uint32 uplayId = 2;
     required uint32 gameVersion = 4;
-    optional uint32 productId = 5;
     optional string simulationConfig = 7;
     optional string executablePath = 10;
     optional string executableArguments = 11;
@@ -82,7 +81,7 @@ message StartReq {
     optional SteamInfo steamInfo = 22;
     optional StartReqDiagnostics diagnostics = 23;
     
-    reserved 3, 6, 8, 9, 13, 14, 15, 18, 21;
+    reserved 3, 5, 6, 8, 9, 13, 14, 15, 18, 21;
 }
 
 message HotkeyStateChangedReq {
