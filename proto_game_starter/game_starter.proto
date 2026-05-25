@@ -43,6 +43,7 @@ message SteamInfo {
     optional uint32 steamRequiredProductId = 6;
     repeated SteamProofOfPurchase steamProofOfPurchase = 7;
     optional bool steamIsRunningOnSteamDeck = 8;
+    optional string steamWebTicket = 9;
 }
 
 message StartReqDiagnostics {
@@ -120,6 +121,10 @@ message StartGrantedRsp {
     optional Hotkeys hotkeys = 9;
 }
 
+message CloseSteamWebTicket {
+    required bool closeTicket = 1;
+}
+
 message StartDeniedRsp {
     optional Reason reason = 1;
     enum Reason {
@@ -168,6 +173,7 @@ message Rsp {
     optional StartGrantedRsp startGrantedRsp = 1;
     optional StartDeniedRsp startDeniedRsp = 2;
     optional DiscordRichPresence discordRichPresence = 3;
+    optional CloseSteamWebTicket closeSteamWebTicket = 4;
 }
 
 message Upstream {

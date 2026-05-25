@@ -64,11 +64,6 @@ message GameCdKey {
     optional string cdKey = 2;
 }
 
-message GameOptions {
-    required string name = 1;
-    required string filepath = 2;
-}
-
 message GameInstall {
     optional bool success = 1;
     optional Chunks chunks = 2;
@@ -116,7 +111,6 @@ message InitRsp {
     optional uint32 uplayPID = 10;
     optional SDKMonitoringConfig sdkMonitoringConfig = 11;
     optional bool devmode = 12;
-    optional GameOptions gameOptions = 13;
     optional GameInstall gameInstall = 14;
     optional Overlay overlay = 15;
     optional HardwareBenchmark hwBenchmark = 16;
@@ -127,6 +121,8 @@ message InitRsp {
     optional UserInit userInit = 21;
     optional UbiServices ubiServices = 22;
     optional CrossBootInit crossBootInit = 23;
+    
+    reserved 13;
 }
 
 message InitProcessRsp {
@@ -865,10 +861,6 @@ message OverlaySetShopUrlRsp {
     required OperationResult result = 2;
 }
 
-message OverlayShowShopUrlReq {
-    required string url = 1;
-}
-
 message OverlayShowBrowserUrlReq {
     required uint32 requestId = 1;
     required string url = 2;
@@ -933,12 +925,13 @@ message SetLanguageCountryCodeReq {
 message OverlayReq {
     optional OverlayShowReq overlayShowReq = 1;
     optional OverlaySetShopUrlReq overlaySetShopUrlReq = 2;
-    optional OverlayShowShopUrlReq overlayShowShopUrlReq = 3;
     optional OverlayShowBrowserUrlReq overlayShowBrowserUrlReq = 4;
     optional OverlayShowNotificationReq overlayShowNotificationReq = 5;
     optional OverlayShowFriendInvitationReq overlayShowFriendInvitationReq = 6;
     optional OverlayShowFriendSelectionReq overlayShowFriendSelectionReq = 7;
     optional OverlayShowMicroAppReq overlayShowMicroAppReq = 8;
+    
+    reserved 3;
 }
 
 message OverlayRsp {
@@ -1181,14 +1174,6 @@ message MetadataReq {
     optional ClearContinuousTag clearContinuousTag = 3;
 }
 
-message SetGameOptionsInGameStateReq {
-    optional bool canApplyOptions = 1;
-}
-
-message GameOptionsReq {
-    optional SetGameOptionsInGameStateReq setInGameStateReq = 1;
-}
-
 message TerminateGamePush {
     
 }
@@ -1387,7 +1372,6 @@ message Req {
     optional SDKMonitoringReq sdkMonitoringReq = 17;
     optional RichPresenceReq richPresenceReq = 18;
     optional StoreReq storeReq = 20;
-    optional GameOptionsReq gameOptionsReq = 21;
     optional SetLanguageCountryCodeReq setLanguageCountryCodeReq = 22;
     optional ProductReq productReq = 23;
     optional MultiplayerReq multiplayerReq = 24;
@@ -1397,7 +1381,7 @@ message Req {
     optional CrossBootAllowedReq crossBootAllowedReq = 28;
     optional CrossBootStatusReq crossBootStatusReq = 29;
     
-    reserved 4;
+    reserved 4, 21;
 }
 
 message Rsp {
@@ -1559,7 +1543,7 @@ enum OverlaySection {
     OverlaySection_ProductActivation = 9;
     OverlaySection_PendingGameInvites = 10;
     OverlaySection_Challenges = 11;
-    OverlaySection_GameOptions = 12;
+    OverlaySection_GameOptions = 12 [deprecated = true];
 }
 
 enum OverlayState {

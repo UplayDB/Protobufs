@@ -18,6 +18,10 @@ message FavouriteGames {
     repeated FavouriteGame games = 1;
 }
 
+message DownloadInProgressGames {
+    repeated uint32 productId = 1;
+}
+
 message HiddenGames {
     repeated HiddenGame games = 1;
 }
@@ -133,6 +137,7 @@ message UserSettings {
     optional SpotlightShownTimestamps spotlightShownTimestamps = 26;
     optional bool connectBetaPromoDismissed = 27;
     optional SteamGames steamGames = 28;
+    optional DownloadInProgressGames downloadInProgressGames = 29;
 }
 
 enum GameLibraryStyle {

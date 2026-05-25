@@ -29,6 +29,7 @@ message GetPatchInfoRsp {
     required string patch_base_url = 4;
     required uint32 latest_version = 5;
     optional uint32 track_type = 6;
+    optional bool mandatory_on_startup = 7;
 }
 
 message Req {

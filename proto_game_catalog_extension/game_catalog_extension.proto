@@ -162,6 +162,35 @@ message PauseProductRsp {
     }
 }
 
+message GetIdInfoReq {
+    string platform_id = 1;
+}
+
+message IdInfo {
+    string platform_id = 1;
+    uint32 product_id = 2;
+    
+    Type type = 3;
+    enum Type {
+        Unknown = 0;
+        Game = 1;
+        Addon = 2;
+    }
+    
+    uint32 base_product_id = 4;
+}
+
+message GetIdInfoRsp {
+    Result result = 1;
+    enum Result {
+        Undefined = 0;
+        Success = 1;
+        CurrentlyUnknown = 2;
+    }
+    
+    IdInfo id_info = 2;
+}
+
 message ProductManagementReq {
     oneof request {
         GetProductActionsReq get_product_actions = 1;
@@ -169,6 +198,7 @@ message ProductManagementReq {
         StartGameDownloadReq start_game_download = 3;
         UninstallProductReq uninstall_product = 4;
         PauseProductReq pause_product = 5;
+        GetIdInfoReq get_id_info = 6;
     }
 }
 
@@ -179,6 +209,7 @@ message ProductManagementRsp {
         StartGameDownloadRsp start_game_download = 3;
         UninstallProductRsp uninstall_product = 4;
         PauseProductRsp pause_product = 5;
+        GetIdInfoRsp get_id_info = 6;
     }
 }
 
