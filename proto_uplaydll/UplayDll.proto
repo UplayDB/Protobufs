@@ -861,6 +861,10 @@ message OverlaySetShopUrlRsp {
     required OperationResult result = 2;
 }
 
+message OverlayShowShopUrlReq {
+    required string url = 1;
+}
+
 message OverlayShowBrowserUrlReq {
     required uint32 requestId = 1;
     required string url = 2;
@@ -925,13 +929,12 @@ message SetLanguageCountryCodeReq {
 message OverlayReq {
     optional OverlayShowReq overlayShowReq = 1;
     optional OverlaySetShopUrlReq overlaySetShopUrlReq = 2;
+    optional OverlayShowShopUrlReq overlayShowShopUrlReq = 3;
     optional OverlayShowBrowserUrlReq overlayShowBrowserUrlReq = 4;
     optional OverlayShowNotificationReq overlayShowNotificationReq = 5;
     optional OverlayShowFriendInvitationReq overlayShowFriendInvitationReq = 6;
     optional OverlayShowFriendSelectionReq overlayShowFriendSelectionReq = 7;
     optional OverlayShowMicroAppReq overlayShowMicroAppReq = 8;
-    
-    reserved 3;
 }
 
 message OverlayRsp {

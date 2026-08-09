@@ -14,6 +14,11 @@ message DiscordRichPresence {
     optional string text = 5;
 }
 
+message SteamCdKey {
+    required uint32 steamAppId = 1;
+    required string cdKey = 2;
+}
+
 message SteamProofOfPurchase {
     required uint32 steamAppId = 1;
     required string ticket = 2;
@@ -44,6 +49,8 @@ message SteamInfo {
     repeated SteamProofOfPurchase steamProofOfPurchase = 7;
     optional bool steamIsRunningOnSteamDeck = 8;
     optional string steamWebTicket = 9;
+    repeated SteamCdKey steamCdKey = 10;
+    optional bool isSteamUserLoggedOn = 11;
 }
 
 message StartReqDiagnostics {

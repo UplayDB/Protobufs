@@ -221,9 +221,16 @@ message RegisterOwnershipByCdKeyReq {
     optional uint32 uplay_id = 3;
 }
 
+message SteamGameInfo {
+    optional uint32 steam_app_id = 1;
+    optional string steam_web_ticket = 2;
+    optional string steam_account_id64 = 3;
+}
+
 message RegisterOwnershipSteamPopReq {
     repeated string ticket = 1;
     required bool confirm = 2;
+    optional SteamGameInfo steam_game_info = 3;
 }
 
 message RegisterOwnershipSteamPopRsp {

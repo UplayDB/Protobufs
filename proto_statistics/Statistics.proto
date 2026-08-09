@@ -855,6 +855,13 @@ message GameStarterErrorData {
     optional uint32 brand = 4;
     optional string steamAccount = 5;
     
+    optional SteamUserLoggedOn steamUserLoggedOn = 6;
+    enum SteamUserLoggedOn {
+        Unknown = -1;
+        No = 0;
+        Yes = 1;
+    }
+    
     reserved 2;
 }
 
@@ -897,6 +904,20 @@ message CDKeyModalShowData {
 
 message PopFailedClaimedOtherData {
     optional uint32 productId = 1;
+}
+
+message StartActivatePopProductData {
+    optional uint32 gameId = 1;
+    optional uint32 activationMode = 2;
+    optional uint32 nbSteamGames = 3;
+    optional string steamAccount = 4;
+}
+
+message ActivatePopProductData {
+    optional uint32 gameId = 1;
+    optional string failReason = 2;
+    optional uint32 nbSteamGames = 3;
+    optional string steamAccount = 4;
 }
 
 message EventObjectData {
@@ -977,6 +998,8 @@ message EventObjectData {
     optional StartActivateProductObjectData startActivateProduct = 80;
     optional CDKeyModalShowData CDKeyModalShow = 81;
     optional PopFailedClaimedOtherData popFailedClaimedOther = 82;
+    optional StartActivatePopProductData startActivatePopProduct = 83;
+    optional ActivatePopProductData activatePopProduct = 84;
     
     reserved 22, 33, 65, 66, 67;
 }

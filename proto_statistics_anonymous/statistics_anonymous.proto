@@ -6,6 +6,7 @@ message UpcStartObjectData {
     required uint32 buildNumber = 1;
     required string clientVersion = 2;
     required string platformMode = 3;
+    optional uint32 productId = 4;
 }
 
 message UpcReadyObjectData {

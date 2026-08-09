@@ -17,11 +17,6 @@ message InitializeReq {
     bool with_ui = 2;
 }
 
-message IdMappingElement {
-    uint32 ubi_product_id = 1;
-    string ms_product_id = 2;
-}
-
 message InitializeRsp {
     Result result = 1;
     enum Result {
@@ -30,8 +25,6 @@ message InitializeRsp {
         InternalError = 2;
         UserInteractionRequired = 3;
     }
-    
-    repeated IdMappingElement id_mapping = 2;
 }
 
 message CheckUserReq {
@@ -53,6 +46,7 @@ message LaunchGameRsp {
         InternalError = 0;
         Success = 1;
         LaunchNotPermitted = 2;
+        NotAGame = 3;
     }
     
     string reason = 2;
@@ -101,6 +95,7 @@ message LocalProductDetails {
     
     uint64 installed_date_since_epoch = 5;
     uint64 last_played_date_since_epoch = 6;
+    repeated uint32 addon_ids = 7;
 }
 
 message GetLocalProductDetailsRsp {
@@ -109,6 +104,7 @@ message GetLocalProductDetailsRsp {
         Undefined = 0;
         Success = 1;
         NoDataAvailable = 2;
+        NotAGame = 3;
     }
     
     LocalProductDetails product_details = 2;
@@ -129,6 +125,7 @@ message StartGameDownloadRsp {
         Undefined = 0;
         Success = 1;
         Aborted = 2;
+        NotAGame = 3;
         FailedGenericError = 10;
         FailedDownloadNotPermitted = 11;
         FailedDownloadPermissionsNotAvailable = 12;
@@ -147,6 +144,7 @@ message UninstallProductRsp {
     enum Result {
         InternalError = 0;
         Success = 1;
+        NotAGame = 2;
     }
 }
 
@@ -159,25 +157,17 @@ message PauseProductRsp {
     enum Result {
         InternalError = 0;
         Success = 1;
+        NotAGame = 2;
     }
 }
 
 message GetIdInfoReq {
-    string platform_id = 1;
+    string platform_product_id = 1;
 }
 
 message IdInfo {
-    string platform_id = 1;
+    string platform_product_id = 1;
     uint32 product_id = 2;
-    
-    Type type = 3;
-    enum Type {
-        Unknown = 0;
-        Game = 1;
-        Addon = 2;
-    }
-    
-    uint32 base_product_id = 4;
 }
 
 message GetIdInfoRsp {
@@ -191,6 +181,49 @@ message GetIdInfoRsp {
     IdInfo id_info = 2;
 }
 
+message GetProductInfoReq {
+    uint32 product_id = 1;
+}
+
+message ProductInfo {
+    uint32 product_id = 1;
+    string platform_product_id = 2;
+    
+    Type type = 3;
+    enum Type {
+        Unknown = 0;
+        Game = 1;
+        Addon = 2;
+    }
+    
+    uint32 base_product_id = 4;
+}
+
+message GetProductInfoRsp {
+    Result result = 1;
+    enum Result {
+        Undefined = 0;
+        Success = 1;
+        CurrentlyUnknown = 2;
+    }
+    
+    ProductInfo product_info = 2;
+}
+
+message GetLocalProductsReq {
+    
+}
+
+message GetLocalProductsRsp {
+    Result result = 1;
+    enum Result {
+        Undefined = 0;
+        Success = 1;
+    }
+    
+    repeated uint32 product_ids = 2;
+}
+
 message ProductManagementReq {
     oneof request {
         GetProductActionsReq get_product_actions = 1;
@@ -199,6 +232,8 @@ message ProductManagementReq {
         UninstallProductReq uninstall_product = 4;
         PauseProductReq pause_product = 5;
         GetIdInfoReq get_id_info = 6;
+        GetProductInfoReq get_product_info = 7;
+        GetLocalProductsReq get_local_products = 8;
     }
 }
 
@@ -210,6 +245,8 @@ message ProductManagementRsp {
         UninstallProductRsp uninstall_product = 4;
         PauseProductRsp pause_product = 5;
         GetIdInfoRsp get_id_info = 6;
+        GetProductInfoRsp get_product_info = 7;
+        GetLocalProductsRsp get_local_products = 8;
     }
 }
 
@@ -223,11 +260,13 @@ message LocalProductDetailsUpdated {
 
 message ProductDownloadStarted {
     uint32 product_id = 1;
+    repeated uint32 associated_product_ids = 2;
 }
 
 message ProductDownloadUpdated {
     uint32 product_id = 1;
     uint64 downloaded_bytes = 2;
+    repeated uint32 associated_product_ids = 3;
     uint64 total_bytes = 10;
     uint64 required_bytes = 11;
     uint64 bytes_per_second = 12;
@@ -244,6 +283,8 @@ message ProductDownloadCompleted {
         Cancelled = 3;
         Failed = 4;
     }
+    
+    repeated uint32 associated_product_ids = 3;
 }
 
 message ProductUninstallStarted {
