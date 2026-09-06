@@ -911,6 +911,9 @@ message StartActivatePopProductData {
     optional uint32 activationMode = 2;
     optional uint32 nbSteamGames = 3;
     optional string steamAccount = 4;
+    optional uint32 attempt = 5;
+    optional uint32 steamGameId = 6;
+    repeated uint32 steamAppIdList = 7;
 }
 
 message ActivatePopProductData {
@@ -918,6 +921,9 @@ message ActivatePopProductData {
     optional string failReason = 2;
     optional uint32 nbSteamGames = 3;
     optional string steamAccount = 4;
+    optional uint32 attempt = 5;
+    optional uint32 steamGameId = 6;
+    optional uint32 steamAppId = 7;
 }
 
 message EventObjectData {
